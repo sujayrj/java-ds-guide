@@ -1,0 +1,2677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Java Collections & Data Structures — Complete Mastery Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* =====================================================
+   RESET & BASE
+===================================================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'IBM Plex Sans', Arial, sans-serif;
+  background: #ffffff;
+  color: #1a1a1a;
+  line-height: 1.7;
+}
+
+/* =====================================================
+   TOP NAVIGATION
+===================================================== */
+.topnav {
+  background: #1a1a2e;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 3px solid #2563eb;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0;
+}
+
+.topnav-brand {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 14px 16px 14px 0;
+  white-space: nowrap;
+  border-right: 1px solid #374151;
+  margin-right: 8px;
+}
+
+.topnav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  flex: 1;
+}
+
+.topnav-links a {
+  color: #9ca3af;
+  text-decoration: none;
+  font-size: 12px;
+  font-family: 'IBM Plex Mono', monospace;
+  padding: 14px 10px;
+  transition: color 0.15s;
+  white-space: nowrap;
+}
+
+.topnav-links a:hover { color: #ffffff; }
+
+/* =====================================================
+   PAGE WRAPPER
+===================================================== */
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+/* =====================================================
+   HERO
+===================================================== */
+.hero {
+  padding: 48px 0 40px;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.hero-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: #2563eb;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.hero h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.25;
+  margin-bottom: 14px;
+}
+
+.hero h1 span { color: #2563eb; }
+
+.hero-desc {
+  font-size: 15px;
+  color: #4b5563;
+  max-width: 680px;
+  margin-bottom: 24px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.stat-item { display: flex; flex-direction: column; gap: 2px; }
+
+.stat-val {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 20px;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* =====================================================
+   CHAPTERS
+===================================================== */
+.chapter {
+  padding: 48px 0 36px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.chapter-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.ch-badge {
+  background: #2563eb;
+  color: #ffffff;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.ch-goal {
+  display: inline-block;
+  background: #fef9c3;
+  border: 1px solid #fbbf24;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #78350f;
+  margin-bottom: 10px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+}
+
+.ch-goal::before { content: '🎯 '; }
+
+h2.ch-h {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 6px;
+  line-height: 1.25;
+}
+
+h2.ch-h span { color: #2563eb; }
+
+.ch-subtitle {
+  font-size: 14px;
+  color: #4b5563;
+  line-height: 1.65;
+}
+
+/* =====================================================
+   SECTION HEADINGS
+===================================================== */
+h3.sh {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 32px 0 12px;
+  padding: 8px 12px;
+  background: #f3f4f6;
+  border-left: 4px solid #2563eb;
+  border-radius: 0 4px 4px 0;
+}
+
+h4.ssh {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e40af;
+  margin: 22px 0 8px;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+p {
+  margin-bottom: 14px;
+  font-size: 15px;
+  color: #1a1a1a;
+}
+
+p:last-child { margin-bottom: 0; }
+
+strong { font-weight: 700; color: #1a1a1a; }
+
+em { font-style: italic; color: #374151; }
+
+/* =====================================================
+   CODE BLOCKS — dark bg always readable
+===================================================== */
+pre {
+  background: #1e2433;
+  border-radius: 6px;
+  padding: 18px 20px;
+  overflow-x: auto;
+  margin: 16px 0;
+  position: relative;
+}
+
+pre[data-lang]::before {
+  content: attr(data-lang);
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+code {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  line-height: 1.65;
+  color: #e2e8f0;
+}
+
+/* inline code */
+p code, li code, td code, .callout-body code, .iq-a code, .ans-body code {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 13px;
+  color: #1e40af;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+/* syntax highlighting (inside dark pre blocks) */
+.kw { color: #f87171; }
+.ty { color: #93c5fd; }
+.st { color: #86efac; }
+.cm { color: #6b7280; font-style: italic; }
+.nm { color: #fcd34d; }
+.fn { color: #c4b5fd; }
+.an { color: #fb923c; }
+
+/* =====================================================
+   TABLES
+===================================================== */
+.tbl-wrap {
+  overflow-x: auto;
+  margin: 16px 0;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 400px;
+}
+
+th {
+  background: #f3f4f6;
+  color: #1a1a1a;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 2px solid #2563eb;
+}
+
+td {
+  padding: 9px 14px;
+  border-bottom: 1px solid #e5e7eb;
+  color: #1a1a1a;
+  vertical-align: top;
+  font-size: 14px;
+}
+
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f9fafb; }
+
+/* complexity badges */
+.cx {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+}
+.cx-g { background: #dcfce7; color: #166534; }
+.cx-y { background: #fef3c7; color: #92400e; }
+.cx-r { background: #fee2e2; color: #991b1b; }
+.cx-b { background: #eff6ff; color: #1e40af; }
+
+/* =====================================================
+   CALLOUT BOXES
+===================================================== */
+.callout {
+  display: flex;
+  gap: 12px;
+  border-radius: 6px;
+  padding: 14px 16px;
+  margin: 16px 0;
+  border-left: 4px solid;
+}
+
+.callout-icon { font-size: 18px; flex-shrink: 0; }
+.callout-body { flex: 1; }
+
+.callout-title {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.callout p { font-size: 14px; margin-bottom: 4px; }
+
+.callout.tip    { background: #f0fdf4; border-color: #22c55e; }
+.callout.tip    .callout-title { color: #166534; }
+.callout.tip    p { color: #14532d; }
+
+.callout.warn   { background: #fffbeb; border-color: #f59e0b; }
+.callout.warn   .callout-title { color: #92400e; }
+.callout.warn   p { color: #78350f; }
+
+.callout.danger { background: #fef2f2; border-color: #ef4444; }
+.callout.danger .callout-title { color: #991b1b; }
+.callout.danger p { color: #7f1d1d; }
+
+.callout.info   { background: #eff6ff; border-color: #3b82f6; }
+.callout.info   .callout-title { color: #1e40af; }
+.callout.info   p { color: #1e3a8a; }
+
+/* =====================================================
+   MENTAL MODEL BOX
+===================================================== */
+.mental-model {
+  background: #faf5ff;
+  border: 1px solid #c4b5fd;
+  border-left: 4px solid #7c3aed;
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin: 18px 0;
+}
+
+.mental-model::before {
+  content: '🧠 MENTAL MODEL';
+  display: block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #7c3aed;
+  letter-spacing: 0.12em;
+  margin-bottom: 8px;
+}
+
+.mental-model p {
+  color: #2e1065;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.mental-model strong { color: #6d28d9; }
+
+/* =====================================================
+   COMPLEXITY CARD
+===================================================== */
+.cx-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 16px 18px;
+  margin: 16px 0;
+}
+
+.cx-card-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.cx-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 8px;
+}
+
+.cx-item {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 10px 12px;
+}
+
+.cx-item-label {
+  font-size: 11px;
+  color: #6b7280;
+  font-family: 'IBM Plex Mono', monospace;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.cx-item-val {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.cx-item-val.g { color: #166534; }
+.cx-item-val.y { color: #92400e; }
+.cx-item-val.r { color: #991b1b; }
+
+/* =====================================================
+   SCENARIO GRID
+===================================================== */
+.scenario-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 14px 0;
+}
+
+.scenario-card {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 14px 16px;
+}
+
+.scenario-card h5 {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.scenario-card ul {
+  padding-left: 16px;
+  list-style: disc;
+}
+
+.scenario-card ul li {
+  font-size: 13px;
+  color: #374151;
+  margin-bottom: 4px;
+  line-height: 1.5;
+}
+
+/* =====================================================
+   QUIZ
+===================================================== */
+.quiz-section {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 20px;
+  margin: 28px 0;
+}
+
+.quiz-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.quiz-header h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.quiz-badge {
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'IBM Plex Mono', monospace;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.quiz-q {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-left: 3px solid #2563eb;
+  border-radius: 4px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+}
+
+.quiz-q p {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 8px;
+}
+
+details.quiz-ans summary {
+  cursor: pointer;
+  font-size: 13px;
+  color: #2563eb;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  list-style: none;
+  user-select: none;
+}
+
+details.quiz-ans summary::-webkit-details-marker { display: none; }
+details.quiz-ans summary::before { content: '▶ Show Answer'; }
+details.quiz-ans[open] summary::before { content: '▼ Hide Answer'; }
+
+details.quiz-ans .ans-body {
+  margin-top: 8px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-size: 13px;
+  color: #14532d;
+  line-height: 1.65;
+}
+
+/* =====================================================
+   TAKEAWAY
+===================================================== */
+.takeaway {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-left: 4px solid #22c55e;
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin: 24px 0;
+}
+
+.takeaway::before {
+  content: '✅ CHAPTER TAKEAWAYS';
+  display: block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #166534;
+  letter-spacing: 0.12em;
+  margin-bottom: 12px;
+}
+
+.takeaway ul {
+  padding-left: 18px;
+  list-style: disc;
+}
+
+.takeaway ul li {
+  font-size: 14px;
+  color: #14532d;
+  margin-bottom: 6px;
+  line-height: 1.6;
+}
+
+/* =====================================================
+   PRACTICE BOX
+===================================================== */
+.practice {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-left: 4px solid #3b82f6;
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin: 18px 0;
+}
+
+.practice::before {
+  content: '💻 PRACTICE EXERCISE';
+  display: block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #1e40af;
+  letter-spacing: 0.12em;
+  margin-bottom: 10px;
+}
+
+.practice p { font-size: 14px; color: #1e3a8a; margin-bottom: 6px; }
+
+/* =====================================================
+   INTERVIEW QUESTION BOX
+===================================================== */
+.interview-q {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 16px 18px;
+  margin: 12px 0;
+}
+
+.interview-q .iq-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: #2563eb;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+
+.interview-q .iq-q {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.interview-q .iq-a {
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.7;
+}
+
+/* =====================================================
+   BACK TO TOP
+===================================================== */
+.back-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #2563eb;
+  color: #ffffff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 2px 10px rgba(37,99,235,0.4);
+  z-index: 50;
+}
+
+/* =====================================================
+   UTILITIES
+===================================================== */
+ul, ol { padding-left: 20px; }
+li { margin-bottom: 5px; font-size: 15px; color: #1a1a1a; }
+
+/* =====================================================
+   RESPONSIVE — MOBILE
+===================================================== */
+@media (max-width: 640px) {
+  .page { padding: 0 16px 60px; }
+  .topnav { padding: 0 14px; }
+  .topnav-brand { font-size: 12px; padding: 12px 10px 12px 0; }
+  .topnav-links a { font-size: 11px; padding: 12px 6px; }
+  .hero { padding: 28px 0 24px; }
+  .hero h1 { font-size: 22px; }
+  h2.ch-h { font-size: 19px; }
+  h3.sh { font-size: 15px; }
+  .chapter { padding: 32px 0 24px; }
+  .scenario-grid { grid-template-columns: 1fr; }
+  .cx-grid { grid-template-columns: repeat(2, 1fr); }
+  .chapter-header { flex-direction: column; gap: 10px; }
+  .hero-stats { gap: 16px; }
+  pre { padding: 14px 14px; }
+  code { font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <div class="topnav-brand">Java Collections &amp; DS</div>
+  <div class="topnav-links">
+    <a href="#ch0">00 Big O</a>
+    <a href="#ch1">01 Arrays</a>
+    <a href="#ch2">02 ArrayList</a>
+    <a href="#ch3">03 LinkedList</a>
+    <a href="#ch4">04 Stack</a>
+    <a href="#ch5">05 Queue</a>
+    <a href="#ch6">06 HashMap</a>
+    <a href="#ch7">07 LinkedHashMap</a>
+    <a href="#ch8">08 TreeMap</a>
+    <a href="#ch9">09 Sets</a>
+    <a href="#ch12">12 PriorityQueue</a>
+    <a href="#ch13">13 Collections</a>
+    <a href="#ch14">14 Choosing DS</a>
+    <a href="#ch15">15 Interviews</a>
+  </div>
+</nav>
+
+<div class="page">
+<div class="hero" id="top">
+  <div class="hero-tag">Complete Mastery Guide</div>
+  <h1>Java <span>Collections</span> &<br>Data Structures</h1>
+  <p class="hero-desc">
+    A production-grade deep dive into every major data structure in Java — from raw arrays
+    to heaps. Covers time &amp; space complexity, real banking-world scenarios, 200+ code examples,
+    interview questions, mental models, and hands-on exercises. Designed to take you from
+    zero to interview-ready and production-confident.
+  </p>
+  <div class="hero-stats">
+    <div class="stat-item"><div class="stat-val">16</div><div class="stat-label">Chapters</div></div>
+    <div class="stat-item"><div class="stat-val">14+</div><div class="stat-label">Data Structures</div></div>
+    <div class="stat-item"><div class="stat-val">200+</div><div class="stat-label">Code Examples</div></div>
+    <div class="stat-item"><div class="stat-val">∞</div><div class="stat-label">Mental Models</div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     CHAPTER 0 — BIG O & COMPLEXITY
+═══════════════════════════════════════════════════════════ -->
+<section class="chapter" id="ch0">
+  <div class="chapter-header">
+    <div class="ch-badge">CH 00</div>
+    <div class="ch-title-block">
+      <div class="ch-goal">Understanding and evaluating time &amp; space complexity</div>
+      <h2 class="ch-h">Big O Notation &amp; <span>Complexity Analysis</span></h2>
+      <p class="ch-subtitle">Before picking a data structure, you need a language to describe performance. Big O is that language — learn it once, use it forever.</p>
+    </div>
+  </div>
+
+  <h3 class="sh">What Is Big O Notation?</h3>
+  <p>Big O notation describes how the <strong>running time or memory usage of an algorithm scales</strong> as the input size (<em>n</em>) grows toward infinity. It is <em>not</em> the exact number of operations — it is the <em>growth rate</em>.</p>
+  <p>Think of it like this: if you double the input, does the work double? Quadruple? Stay the same? That relationship is what Big O captures.</p>
+
+  <div class="mental-model">
+    <p>Imagine a <strong>bank with 1,000,000 customers</strong>. If you need to find one customer:<br>
+    • Scanning every record one-by-one = <strong>O(n)</strong> — 1M checks in the worst case<br>
+    • Using a sorted index and binary search = <strong>O(log n)</strong> — only ~20 checks<br>
+    • Looking up by account ID in a hash table = <strong>O(1)</strong> — found immediately<br><br>
+    The <em>input size</em> is 1M customers. Big O tells you how the cost grows if you had 2M, 10M, or 100M.</p>
+  </div>
+
+  <h3 class="sh">The Major Complexity Classes</h3>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Big O</th><th>Name</th><th>Example</th><th>For n=1,000,000</th><th>Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="cx cx-g">O(1)</span></td><td>Constant</td><td>HashMap lookup, array index access</td><td>1 op</td><td><span class="cx cx-g">Excellent</span></td></tr>
+        <tr><td><span class="cx cx-g">O(log n)</span></td><td>Logarithmic</td><td>Binary search, TreeMap get</td><td>~20 ops</td><td><span class="cx cx-g">Great</span></td></tr>
+        <tr><td><span class="cx cx-y">O(n)</span></td><td>Linear</td><td>List scan, unsorted search</td><td>1,000,000 ops</td><td><span class="cx cx-y">Acceptable</span></td></tr>
+        <tr><td><span class="cx cx-y">O(n log n)</span></td><td>Linearithmic</td><td>Merge sort, Collections.sort</td><td>~20M ops</td><td><span class="cx cx-y">OK for sorting</span></td></tr>
+        <tr><td><span class="cx cx-r">O(n²)</span></td><td>Quadratic</td><td>Nested loops, bubble sort</td><td>1 trillion ops</td><td><span class="cx cx-r">Avoid if possible</span></td></tr>
+        <tr><td><span class="cx cx-r">O(2ⁿ)</span></td><td>Exponential</td><td>Brute-force subset enumeration</td><td>∞</td><td><span class="cx cx-r">Catastrophic</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sh">Rules for Calculating Big O</h3>
+
+  <h4 class="ssh">Rule 1 — Drop Constants</h4>
+  <p><code>O(2n)</code> → <code>O(n)</code>. We don't care that you loop twice; we care that it's linear.</p>
+
+  <h4 class="ssh">Rule 2 — Drop Non-Dominant Terms</h4>
+  <p><code>O(n² + n)</code> → <code>O(n²)</code>. As n grows, the n² dominates.</p>
+
+  <h4 class="ssh">Rule 3 — Sequential Steps Add</h4>
+<pre data-lang="java"><code><span class="kw">void</span> <span class="fn">processPayment</span>(List&lt;<span class="ty">Payment</span>&gt; payments) {
+    <span class="cm">// Step 1: O(n)</span>
+    <span class="kw">for</span> (<span class="ty">Payment</span> p : payments) validate(p);
+
+    <span class="cm">// Step 2: O(n)</span>
+    <span class="kw">for</span> (<span class="ty">Payment</span> p : payments) settle(p);
+
+    <span class="cm">// Total: O(n) + O(n) = O(2n) → O(n)</span>
+}</code></pre>
+
+  <h4 class="ssh">Rule 4 — Nested Steps Multiply</h4>
+<pre data-lang="java"><code><span class="kw">void</span> <span class="fn">findDuplicates</span>(List&lt;<span class="ty">String</span>&gt; accounts) {
+    <span class="kw">for</span> (<span class="ty">String</span> a : accounts) {          <span class="cm">// O(n)</span>
+        <span class="kw">for</span> (<span class="ty">String</span> b : accounts) {      <span class="cm">// O(n) inside</span>
+            <span class="kw">if</span> (a.equals(b)) log(a, b);  <span class="cm">// O(n * n) = O(n²)</span>
+        }
+    }
+}</code></pre>
+
+  <h3 class="sh">Best, Average, and Worst Case</h3>
+  <p>Big O is <em>typically</em> about the <strong>worst case</strong> — the maximum work the algorithm could ever do. But you'll encounter three distinct cases:</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Case</th><th>Notation</th><th>Meaning</th><th>Example (Linear Search)</th></tr></thead>
+      <tbody>
+        <tr><td>Best</td><td>Ω (Omega)</td><td>Minimum work possible</td><td>Element is first — Ω(1)</td></tr>
+        <tr><td>Average</td><td>Θ (Theta)</td><td>Typical/expected work</td><td>Element is in the middle — Θ(n/2) → Θ(n)</td></tr>
+        <tr><td>Worst</td><td>O (Big O)</td><td>Maximum work possible</td><td>Element not found — O(n)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sh">Space Complexity</h3>
+  <p>Space complexity measures <strong>how much additional memory</strong> an algorithm uses as input grows. It does <em>not</em> include the input itself (that's input space) — it measures <em>auxiliary space</em>.</p>
+
+<pre data-lang="java"><code><span class="cm">// O(1) space — no extra memory allocated</span>
+<span class="kw">int</span> <span class="fn">sum</span>(<span class="kw">int</span>[] arr) {
+    <span class="kw">int</span> total = <span class="nm">0</span>;
+    <span class="kw">for</span> (<span class="kw">int</span> x : arr) total += x;
+    <span class="kw">return</span> total;
+}
+
+<span class="cm">// O(n) space — creates a new list of size n</span>
+List&lt;<span class="ty">Integer</span>&gt; <span class="fn">doubled</span>(<span class="kw">int</span>[] arr) {
+    List&lt;<span class="ty">Integer</span>&gt; result = <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;();
+    <span class="kw">for</span> (<span class="kw">int</span> x : arr) result.add(x * <span class="nm">2</span>);
+    <span class="kw">return</span> result;
+}</code></pre>
+
+  <div class="callout tip">
+    <div class="callout-icon">💡</div>
+    <div class="callout-body">
+      <div class="callout-title">Time–Space Tradeoff</div>
+      <p>In real systems you often trade one for the other. A HashMap uses <strong>O(n) space</strong> to give you <strong>O(1) time</strong> on lookups. Caching (like Redis) is this tradeoff at infrastructure scale — spend memory to save time.</p>
+    </div>
+  </div>
+
+  <h3 class="sh">Amortised Complexity</h3>
+  <p>Some operations are occasionally expensive but cheap on average. The classic example is <code>ArrayList.add()</code>. Normally adding an element is O(1), but occasionally the backing array is full and the list must <strong>resize</strong> — copying all elements to a new, larger array — which is O(n). However, since this happens rarely (roughly every n adds), the <em>amortised</em> cost across all adds is still O(1).</p>
+
+  <div class="callout info">
+    <div class="callout-icon">📌</div>
+    <div class="callout-body">
+      <div class="callout-title">Amortised = "averaged over many operations"</div>
+      <p>Think of it like a bank account: most days you spend little, but occasionally you pay a big bill. The <em>average</em> daily spend is still low. Same idea — ArrayList.add() is amortised O(1).</p>
+    </div>
+  </div>
+
+  <div class="quiz-section">
+    <div class="quiz-header">
+      <h4>Chapter 0 Quiz</h4>
+      <span class="quiz-badge">5 Questions</span>
+    </div>
+
+    <div class="quiz-q">
+      <p>Q1. You have an algorithm that runs in O(n² + 3n + 42). What is the simplified Big O?</p>
+      <details class="quiz-ans"><summary>Reveal Answer</summary>
+        <div class="ans-body">O(n²). We drop constants (42, 3) and non-dominant terms (3n), leaving only the fastest-growing term: n².</div>
+      </details>
+    </div>
+
+    <div class="quiz-q">
+      <p>Q2. An operation is O(1) time but O(n) space. Is this always better than O(n) time O(1) space?</p>
+      <details class="quiz-ans"><summary>Reveal Answer</summary>
+        <div class="ans-body">Not always. It depends on whether time or memory is the bottleneck. In memory-constrained environments (embedded systems, certain cloud pricing models), O(n) space can be worse. Big O alone doesn't decide — context matters.</div>
+      </details>
+    </div>
+
+    <div class="quiz-q">
+      <p>Q3. If binary search is O(log n), how many checks does it take to find something in 1 billion records?</p>
+      <details class="quiz-ans"><summary>Reveal Answer</summary>
+        <div class="ans-body">log₂(1,000,000,000) ≈ 30. Only 30 comparisons. This is why search engines and databases use sorted indexes — logarithmic search is extraordinarily efficient at scale.</div>
+      </details>
+    </div>
+
+    <div class="quiz-q">
+      <p>Q4. What's the difference between O(n) and O(n log n)?</p>
+      <details class="quiz-ans"><summary>Reveal Answer</summary>
+        <div class="ans-body">O(n) grows linearly. O(n log n) grows slightly faster — for 1M elements, O(n) = 1M ops and O(n log n) ≈ 20M ops. O(n log n) is the typical cost of efficient sorting algorithms like merge sort and Tim sort (used in Collections.sort).</div>
+      </details>
+    </div>
+
+    <div class="quiz-q">
+      <p>Q5. Why is ArrayList.add() said to be "amortised O(1)" even though resizing costs O(n)?</p>
+      <details class="quiz-ans"><summary>Reveal Answer</summary>
+        <div class="ans-body">Because resizing happens infrequently — roughly once every n adds. When you spread that O(n) cost across all n adds that triggered the resize, each add costs roughly O(1) on average. Amortised analysis averages cost across a sequence of operations.</div>
+      </details>
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <ul>
+      <li>Big O describes growth rate of time/space with respect to input size — not exact counts</li>
+      <li>Dominant growth classes: O(1) &lt; O(log n) &lt; O(n) &lt; O(n log n) &lt; O(n²) &lt; O(2ⁿ)</li>
+      <li>Sequential steps add; nested steps multiply</li>
+      <li>Worst-case Big O is the most important for production safety guarantees</li>
+      <li>Space complexity measures extra memory used — not input size</li>
+      <li>Amortised cost = average cost over a sequence of operations (e.g. ArrayList.add)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CHAPTER 1 — ARRAYS
+═══════════════════════════════════════════════════════════ -->
+<section class="chapter" id="ch1">
+  <div class="chapter-header">
+    <div class="ch-badge">CH 01</div>
+    <div class="ch-title-block">
+      <div class="ch-goal">Understand the most primitive, foundational data structure</div>
+      <h2 class="ch-h"><span>Arrays</span> — The Foundation of Everything</h2>
+      <p class="ch-subtitle">Every other data structure is built on top of arrays. Understanding arrays at a deep level is non-negotiable.</p>
+    </div>
+  </div>
+
+  <div class="mental-model">
+    <p>An array is a <strong>row of numbered lockers in a bank vault</strong>. Each locker has a fixed number, starting at 0. You can jump directly to locker #847 in one step — you don't walk past 846 lockers. However, the vault was built with a fixed number of lockers. If you need more, you have to <strong>build an entirely new vault and move everything over</strong>.</p>
+  </div>
+
+  <h3 class="sh">Internal Structure</h3>
+  <p>An array is a <strong>contiguous block of memory</strong>. When you declare <code>int[] arr = new int[5]</code>, the JVM allocates 5 consecutive memory addresses (4 bytes each for int = 20 bytes total). Element access works by simple arithmetic: <code>address_of_element = base_address + (index × element_size)</code>.</p>
+  <p>This is why array access is always O(1) — no matter the index, one calculation gives you the memory address directly.</p>
+
+<pre data-lang="java"><code><span class="cm">// ── Declaration and Initialisation ──</span>
+<span class="kw">int</span>[] amounts = <span class="kw">new int</span>[<span class="nm">5</span>];              <span class="cm">// [0, 0, 0, 0, 0]</span>
+<span class="kw">int</span>[] balances = {<span class="nm">1000</span>, <span class="nm">2500</span>, <span class="nm">750</span>};   <span class="cm">// inline init</span>
+<span class="ty">String</span>[] accounts = <span class="kw">new</span> <span class="ty">String</span>[<span class="nm">3</span>];       <span class="cm">// [null, null, null]</span>
+
+<span class="cm">// ── Access: O(1) ──</span>
+<span class="kw">int</span> first = balances[<span class="nm">0</span>];               <span class="cm">// 1000</span>
+<span class="kw">int</span> last  = balances[balances.length - <span class="nm">1</span>]; <span class="cm">// 750</span>
+
+<span class="cm">// ── Modification: O(1) ──</span>
+balances[<span class="nm">1</span>] = <span class="nm">3000</span>;                    <span class="cm">// direct assignment</span>
+
+<span class="cm">// ── Traversal: O(n) ──</span>
+<span class="kw">for</span> (<span class="kw">int</span> i = <span class="nm">0</span>; i &lt; balances.length; i++) {
+    <span class="ty">System</span>.out.println(<span class="st">"Balance at index "</span> + i + <span class="st">": "</span> + balances[i]);
+}
+
+<span class="cm">// ── 2D Arrays (Matrix) ── common in banking for FX matrices ──</span>
+<span class="kw">double</span>[][] fxRates = <span class="kw">new double</span>[<span class="nm">5</span>][<span class="nm">5</span>]; <span class="cm">// 5x5 currency pair matrix</span>
+fxRates[<span class="nm">0</span>][<span class="nm">1</span>] = <span class="nm">1.08</span>;               <span class="cm">// USD → EUR</span>
+fxRates[<span class="nm">0</span>][<span class="nm">2</span>] = <span class="nm">155.2</span>;              <span class="cm">// USD → JPY</span></code></pre>
+
+  <div class="cx-card">
+    <div class="cx-card-title">⏱ Time Complexity — Arrays</div>
+    <div class="cx-grid">
+      <div class="cx-item"><div class="cx-item-label">Access by Index</div><div class="cx-item-val g">O(1)</div></div>
+      <div class="cx-item"><div class="cx-item-label">Search (unsorted)</div><div class="cx-item-val y">O(n)</div></div>
+      <div class="cx-item"><div class="cx-item-label">Search (sorted, binary)</div><div class="cx-item-val g">O(log n)</div></div>
+      <div class="cx-item"><div class="cx-item-label">Insert at End</div><div class="cx-item-val g">O(1)</div></div>
+      <div class="cx-item"><div class="cx-item-label">Insert at Middle</div><div class="cx-item-val r">O(n)</div></div>
+      <div class="cx-item"><div class="cx-item-label">Delete at Middle</div><div class="cx-item-val r">O(n)</div></div>
+    </div>
+  </div>
+
+  <h3 class="sh">Key Arrays API</h3>
+
+<pre data-lang="java"><code><span class="kw">import</span> java.util.Arrays;
+
+<span class="kw">int</span>[] payments = {<span class="nm">500</span>, <span class="nm">200</span>, <span class="nm">800</span>, <span class="nm">100</span>, <span class="nm">650</span>};
+
+<span class="cm">// Sort — O(n log n) using Dual-Pivot QuickSort</span>
+<span class="ty">Arrays</span>.sort(payments);
+<span class="cm">// → [100, 200, 500, 650, 800]</span>
+
+<span class="cm">// Binary search — O(log n) — ARRAY MUST BE SORTED FIRST</span>
+<span class="kw">int</span> idx = <span class="ty">Arrays</span>.binarySearch(payments, <span class="nm">500</span>); <span class="cm">// returns index 2</span>
+
+<span class="cm">// Copy — O(n)</span>
+<span class="kw">int</span>[] copy = <span class="ty">Arrays</span>.copyOf(payments, payments.length);
+<span class="kw">int</span>[] partial = <span class="ty">Arrays</span>.copyOfRange(payments, <span class="nm">1</span>, <span class="nm">4</span>); <span class="cm">// [200, 500, 650]</span>
+
+<span class="cm">// Fill — O(n)</span>
+<span class="ty">Arrays</span>.fill(payments, <span class="nm">0</span>); <span class="cm">// all elements set to 0</span>
+
+<span class="cm">// Compare — O(n)</span>
+<span class="kw">boolean</span> same = <span class="ty">Arrays</span>.equals(copy, payments);
+
+<span class="cm">// Stream — bridge to functional operations</span>
+<span class="kw">int</span> total = <span class="ty">Arrays</span>.stream(payments).sum(); <span class="cm">// O(n)</span>
+<span class="kw">int</span> max   = <span class="ty">Arrays</span>.stream(payments).max().getAsInt();</span>
+
+<span class="cm">// Convert to List — O(n)</span>
+<span class="ty">List</span>&lt;<span class="ty">Integer</span>&gt; list = <span class="ty">Arrays</span>.asList(<span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">3</span>); <span class="cm">// fixed-size!</span></code></pre>
+
+  <div class="callout warn">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-body">
+      <div class="callout-title">Arrays.asList() returns a FIXED-SIZE list</div>
+      <p>You can <strong>update</strong> elements but you <strong>cannot add or remove</strong> elements — it will throw <code>UnsupportedOperationException</code>. To get a mutable list: <code>new ArrayList&lt;&gt;(Arrays.asList(...))</code>.</p>
+    </div>
+  </div>
+
+  <h3 class="sh">When to Use Arrays</h3>
+  <div class="scenario-grid">
+    <div class="scenario-card">
+      <h5>✅ Use Arrays When...</h5>
+      <ul>
+        <li>Size is known and fixed at compile/runtime</li>
+        <li>You need maximum performance (no boxing overhead)</li>
+        <li>Working with primitives (<code>int[]</code>, <code>double[]</code>)</li>
+        <li>Implementing algorithms (sorting, DP tables)</li>
+        <li>Representing matrices or grids (2D arrays)</li>
+      </ul>
+    </div>
+    <div class="scenario-card">
+      <h5>❌ Avoid Arrays When...</h5>
+      <ul>
+        <li>Size changes dynamically — use ArrayList</li>
+        <li>Frequent insertions/deletions in the middle</li>
+        <li>You need rich collection API methods</li>
+        <li>Working with generics (type safety complications)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="sh">Production Example — Payment Amount Bucketing</h3>
+<pre data-lang="java"><code><span class="cm">/**
+ * Bank risk system: bucket transactions into value ranges.
+ * Uses arrays for speed — fixed-size buckets known in advance.
+ */</span>
+<span class="an">@Service</span>
+<span class="kw">public class</span> <span class="ty">TransactionBucketService</span> {
+
+    <span class="kw">private static final int</span>[] THRESHOLDS = {<span class="nm">1_000</span>, <span class="nm">10_000</span>, <span class="nm">100_000</span>, <span class="ty">Integer</span>.MAX_VALUE};
+    <span class="kw">private static final</span> <span class="ty">String</span>[] BUCKET_NAMES = {<span class="st">"Low"</span>, <span class="st">"Medium"</span>, <span class="st">"High"</span>, <span class="st">"Whale"</span>};
+
+    <span class="kw">public</span> <span class="ty">String</span> <span class="fn">classify</span>(<span class="kw">int</span> amount) {
+        <span class="kw">for</span> (<span class="kw">int</span> i = <span class="nm">0</span>; i &lt; THRESHOLDS.length; i++) {
+            <span class="kw">if</span> (amount &lt;= THRESHOLDS[i]) {
+                <span class="kw">return</span> BUCKET_NAMES[i];
+            }
+        }
+        <span class="kw">return</span> <span class="st">"Unknown"</span>;
+    }
+
+    <span class="kw">public int</span>[] <span class="fn">countByBucket</span>(List&lt;<span class="ty">Transaction</span>&gt; txns) {
+        <span class="kw">int</span>[] counts = <span class="kw">new int</span>[THRESHOLDS.length]; <span class="cm">// O(1) space</span>
+        <span class="kw">for</span> (<span class="ty">Transaction</span> t : txns) {              <span class="cm">// O(n) time</span>
+            <span class="kw">for</span> (<span class="kw">int</span> i = <span class="nm">0</span>; i &lt; THRESHOLDS.length; i++) {
+                <span class="kw">if</span> (t.getAmount() &lt;= THRESHOLDS[i]) {
+                    counts[i]++;
+                    <span class="kw">break</span>;
+                }
+            }
+        }
+        <span class="kw">return</span> counts; <span class="cm">// O(n) total</span>
+    }
+}</code></pre>
+
+  <div class="practice">
+    <p><strong>Exercise 1:</strong> Given an array of SWIFT transaction amounts (integers), write a method that returns the second-highest amount without sorting. Aim for O(n) time, O(1) space.</p>
+    <p><strong>Exercise 2:</strong> Implement a method that rotates an array of currency amounts to the left by k positions in-place. (Hint: reverse sub-arrays)</p>
+    <p><strong>Exercise 3:</strong> Given a 2D int matrix representing a ledger grid, write a method that returns the sum of each row and each column.</p>
+  </div>
+
+  <div class="takeaway">
+    <ul>
+      <li>Arrays are contiguous memory blocks — O(1) access by index is their superpower</li>
+      <li>Fixed size is their core limitation — resizing requires a full copy (O(n))</li>
+      <li>Use primitives (<code>int[]</code> not <code>Integer[]</code>) for maximum performance</li>
+      <li><code>Arrays.sort()</code> uses Dual-Pivot QuickSort for primitives — O(n log n)</li>
+      <li>Binary search on sorted arrays gives O(log n) — but sort first!</li>
+      <li>Every other Java collection (ArrayList, HashMap, etc.) internally uses arrays</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CHAPTER 2 — ARRAYLIST
+═══════════════════════════════════════════════════════════ -->
+<section class="chapter" id="ch2">
+  <div class="chapter-header">
+    <div class="ch-badge">CH 02</div>
+    <div class="ch-title-block">
+      <div class="ch-goal">Master the most-used Java collection for ordered, dynamic data</div>
+      <h2 class="ch-h"><span>ArrayList</span> — Dynamic Arrays Done Right</h2>
+      <p class="ch-subtitle">ArrayList is your default workhorse. Know its internals, performance characteristics, and edge cases cold.</p>
+    </div>
+  </div>
+
+  <div class="mental-model">
+    <p>ArrayList is like a <strong>bank safe with expandable capacity</strong>. It starts with room for 10 items. When you add an 11th, it silently builds a <strong>new safe that's 50% larger</strong>, moves everything over, and continues. From the outside you just keep adding. The rare expensive move (<em>resize</em>) is hidden and infrequent — giving you effectively O(1) amortised adds.</p>
+  </div>
+
+  <h3 class="sh">Internal Mechanics</h3>
+  <p>ArrayList wraps a plain <code>Object[]</code> array internally. It tracks two things: the backing array and <code>size</code> (the count of actual elements). When <code>size == array.length</code>, it resizes to <code>array.length * 1.5</code>. This growth strategy minimises total copies over many adds.</p>
+
+<pre data-lang="java"><code><span class="cm">// Simplified internal representation (conceptual)</span>
+<span class="kw">class</span> <span class="ty">ArrayList</span>&lt;E&gt; {
+    <span class="ty">Object</span>[] elementData; <span class="cm">// backing array, default size 10</span>
+    <span class="kw">int</span> size = <span class="nm">0</span>;         <span class="cm">// actual number of elements</span>
+
+    <span class="kw">void</span> <span class="fn">add</span>(E e) {
+        <span class="kw">if</span> (size == elementData.length) grow(); <span class="cm">// expensive but rare</span>
+        elementData[size++] = e;               <span class="cm">// O(1) normally</span>
+    }
+
+    <span class="kw">void</span> <span class="fn">grow</span>() {
+        <span class="kw">int</span> newCapacity = elementData.length + (elementData.length &gt;&gt; <span class="nm">1</span>); <span class="cm">// × 1.5</span>
+        elementData = <span class="ty">Arrays</span>.copyOf(elementData, newCapacity);            <span class="cm">// O(n)</span>
+    }
+}</code></pre>
+
+  <h3 class="sh">Core API Methods — Every Single One</h3>
+
+<pre data-lang="java"><code><span class="ty">List</span>&lt;<span class="ty">String</span>&gt; accounts = <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;();  <span class="cm">// default capacity 10</span>
+<span class="ty">List</span>&lt;<span class="ty">String</span>&gt; big = <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;(<span class="nm">1000</span>);    <span class="cm">// pre-sized — avoids resizing</span>
+
+<span class="cm">// ─── ADDING ───────────────────────────────────────────</span>
+accounts.add(<span class="st">"ACC-001"</span>);            <span class="cm">// O(1) amortised — adds to end</span>
+accounts.add(<span class="nm">0</span>, <span class="st">"ACC-000"</span>);        <span class="cm">// O(n) — inserts at index 0, shifts all right</span>
+accounts.addAll(otherList);          <span class="cm">// O(m) — appends all from another list</span>
+
+<span class="cm">// ─── READING ──────────────────────────────────────────</span>
+<span class="ty">String</span> a = accounts.get(<span class="nm">2</span>);          <span class="cm">// O(1) — direct index access</span>
+<span class="kw">int</span> sz = accounts.size();            <span class="cm">// O(1)</span>
+<span class="kw">boolean</span> has = accounts.contains(<span class="st">"ACC-001"</span>); <span class="cm">// O(n) — linear scan</span>
+<span class="kw">int</span> idx = accounts.indexOf(<span class="st">"ACC-001"</span>);    <span class="cm">// O(n) — returns first index or -1</span>
+<span class="kw">int</span> last = accounts.lastIndexOf(<span class="st">"ACC-001"</span>); <span class="cm">// O(n) — returns last index</span>
+<span class="kw">boolean</span> empty = accounts.isEmpty();  <span class="cm">// O(1)</span>
+
+<span class="cm">// ─── REMOVING ─────────────────────────────────────────</span>
+accounts.remove(<span class="nm">2</span>);                 <span class="cm">// O(n) — removes at index, shifts left</span>
+accounts.remove(<span class="st">"ACC-005"</span>);         <span class="cm">// O(n) — finds and removes first occurrence</span>
+accounts.removeIf(s -> s.startsWith(<span class="st">"ACC-0"</span>)); <span class="cm">// O(n) — removes matching</span>
+accounts.clear();                   <span class="cm">// O(n) — sets all refs to null</span>
+
+<span class="cm">// ─── UPDATING ─────────────────────────────────────────</span>
+accounts.set(<span class="nm">1</span>, <span class="st">"ACC-NEW"</span>);         <span class="cm">// O(1) — replaces at index</span>
+
+<span class="cm">// ─── ITERATING ────────────────────────────────────────</span>
+<span class="kw">for</span> (<span class="ty">String</span> acc : accounts) { <span class="cm">/* O(n) */</span> }
+accounts.forEach(acc -> process(acc));   <span class="cm">// O(n) — Lambda iteration</span>
+accounts.stream().filter(...).collect(...); <span class="cm">// O(n) — Stream API</span>
+
+<span class="cm">// ─── SUBLIST ──────────────────────────────────────────</span>
+<span class="ty">List</span>&lt;<span class="ty">String</span>&gt; sub = accounts.subList(<span class="nm">1</span>, <span class="nm">4</span>); <span class="cm">// O(1) — view, NOT a copy</span>
+
+<span class="cm">// ─── SORTING ──────────────────────────────────────────</span>
+accounts.sort(<span class="ty">Comparator</span>.naturalOrder());       <span class="cm">// O(n log n) — in-place</span>
+accounts.sort(<span class="ty">Comparator</span>.comparing(<span class="ty">String</span>::length)); <span class="cm">// custom sort</span>
+
+<span class="cm">// ─── CONVERSION ───────────────────────────────────────</span>
+<span class="ty">Object</span>[] arr = accounts.toArray();                <span class="cm">// O(n)</span>
+<span class="ty">String</span>[] strArr = accounts.toArray(<span class="kw">new</span> <span class="ty">String</span>[<span class="nm">0</span>]); <span class="cm">// O(n) — typed array</span></code></pre>
+
+  <div class="cx-card">
+    <div class="cx-card-title">⏱ Time Complexity — ArrayList</div>
+    <div class="cx-grid">
+      <div class="cx-item"><div class="cx-item-label">get(index)</div><div class="cx-item-val g">O(1)</div></div>
+      <div class="cx-item"><div class="cx-item-label">add(end)</div><div class="cx-item-val g">O(1)*</div></div>
+      <div class="cx-item"><div class="cx-item-label">add(index)</div><div class="cx-item-val r">O(n)</div></div>
+      <div class="cx-item"><div class="cx-item-label">remove(index)</div><div class="cx-item-val r">O(n)</div></div>
+      <div class="cx-item"><div class="cx-item-label">contains()</div><div class="cx-item-val y">O(n)</div></div>
+      <div class="cx-item"><div class="cx-item-label">set(index)</div><div class="cx-item-val g">O(1)</div></div>
+      <div class="cx-item"><div class="cx-item-label">size()</div><div class="cx-item-val g">O(1)</div></div>
+      <div class="cx-item"><div class="cx-item-label">sort()</div><div class="cx-item-val y">O(n log n)</div></div>
+    </div>
+    <p style="font-size:12px;color:#6b7280;margin-top:12px;">* Amortised O(1) — occasionally O(n) when resizing</p>
+  </div>
+
+  <h3 class="sh">Critical Pitfalls</h3>
+
+  <div class="callout danger">
+    <div class="callout-icon">🚫</div>
+    <div class="callout-body">
+      <div class="callout-title">ConcurrentModificationException — The most common ArrayList trap</div>
+      <p>Never modify an ArrayList while iterating it with a for-each loop. Use <code>Iterator.remove()</code> or <code>removeIf()</code> instead.</p>
+    </div>
+  </div>
+
+<pre data-lang="java"><code><span class="cm">// ❌ BAD — throws ConcurrentModificationException</span>
+<span class="kw">for</span> (<span class="ty">String</span> acc : accounts) {
+    <span class="kw">if</span> (acc.startsWith(<span class="st">"INACTIVE"</span>)) accounts.remove(acc);
+}
+
+<span class="cm">// ✅ GOOD — Using Iterator</span>
+<span class="ty">Iterator</span>&lt;<span class="ty">String</span>&gt; it = accounts.iterator();
+<span class="kw">while</span> (it.hasNext()) {
+    <span class="kw">if</span> (it.next().startsWith(<span class="st">"INACTIVE"</span>)) it.remove();
+}
+
+<span class="cm">// ✅ BEST — Using removeIf (Java 8+)</span>
+accounts.removeIf(acc -> acc.startsWith(<span class="st">"INACTIVE"</span>));</code></pre>
+
+  <h3 class="sh">Production Example — Transaction History</h3>
+<pre data-lang="java"><code><span class="an">@Service</span>
+<span class="kw">public class</span> <span class="ty">AccountHistoryService</span> {
+
+    <span class="kw">public</span> <span class="ty">List</span>&lt;<span class="ty">Transaction</span>&gt; <span class="fn">getFilteredHistory</span>(
+            <span class="ty">String</span> accountId, <span class="ty">TransactionFilter</span> filter) {
+
+        <span class="ty">List</span>&lt;<span class="ty">Transaction</span>&gt; raw = transactionRepo.findByAccountId(accountId);
+
+        <span class="cm">// Pre-size the result list to avoid multiple resizes</span>
+        <span class="ty">List</span>&lt;<span class="ty">Transaction</span>&gt; result = <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;(raw.size());
+
+        <span class="kw">for</span> (<span class="ty">Transaction</span> tx : raw) {
+            <span class="kw">if</span> (filter.matches(tx)) result.add(tx);
+        }
+
+        <span class="cm">// Sort by date descending — O(n log n)</span>
+        result.sort(<span class="ty">Comparator</span>.comparing(<span class="ty">Transaction</span>::getDate).reversed());
+
+        <span class="kw">return</span> result;
+    }
+
+    <span class="kw">public</span> <span class="ty">List</span>&lt;<span class="ty">Transaction</span>&gt; <span class="fn">batchEnrich</span>(<span class="ty">List</span>&lt;<span class="ty">Transaction</span>&gt; txns) {
+        <span class="cm">// replaceAll — in-place O(n) transform</span>
+        txns.replaceAll(tx -> fxEnrichmentService.enrich(tx));
+        <span class="kw">return</span> txns;
+    }
+}</code></pre>
+
+  <div class="practice">
+    <p><strong>Exercise 1:</strong> Build a SWIFT message queue simulation using ArrayList. Implement methods: <code>enqueue(msg)</code>, <code>dequeue()</code>, <code>peek()</code>, and <code>printAll()</code>. Note which operations are inefficient and why.</p>
+    <p><strong>Exercise 2:</strong> Given a list of bank transactions, write a method using streams to find the top-5 highest-value transactions of type "CREDIT" from the last 30 days.</p>
+    <p><strong>Exercise 3:</strong> Implement a merge of two sorted transaction lists (by amount) into one sorted list in O(n+m) without using sort().</p>
+  </div>
+
+  <div class="takeaway">
+    <ul>
+      <li>ArrayList internally wraps <code>Object[]</code> — resizes by ×1.5 when full</li>
+      <li><code>get(i)</code> and <code>set(i)</code> are O(1) — ArrayList's key strength</li>
+      <li><code>add()</code> to the end is amortised O(1); <code>add(i)</code> to the middle is O(n)</li>
+      <li>Pre-size with <code>new ArrayList&lt;&gt;(expectedSize)</code> if you know the size</li>
+      <li>Use <code>removeIf()</code> for safe in-loop removal</li>
+      <li>Not thread-safe — use <code>CopyOnWriteArrayList</code> or synchronisation in concurrent code</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CHAPTER 3 — LINKEDLIST
+═══════════════════════════════════════════════════════════ -->
+<section class="chapter" id="ch3">
+  <div class="chapter-header">
+    <div class="ch-badge">CH 03</div>
+    <div class="ch-title-block">
+      <div class="ch-goal">Understand pointer-based storage and when it beats array-based lists</div>
+      <h2 class="ch-h"><span>LinkedList</span> — The Chain of Nodes</h2>
+      <p class="ch-subtitle">LinkedList excels at head/tail insertions and deletions. Its random access performance is its biggest weakness.</p>
+    </div>
+  </div>
+
+  <div class="mental-model">
+    <p>LinkedList is like a <strong>chain of SWIFT messages</strong> where each message contains a pointer to the next message in the chain (and the previous one). To find message #500, you must <strong>start at message #1 and follow 499 links</strong>. But to insert or remove a message anywhere in the chain, you just <strong>re-wire two links</strong> — O(1) once you're at the right position.</p>
+  </div>
+
+  <h3 class="sh">Internal Structure — Doubly Linked List</h3>
+  <p>Java's <code>LinkedList</code> is a <strong>doubly-linked list</strong>. Each node holds a value, a reference to the next node, and a reference to the previous node. The list tracks both the <code>head</code> (first node) and <code>tail</code> (last node) directly.</p>
+
+<pre data-lang="java"><code><span class="cm">// Internal node (simplified)</span>
+<span class="kw">static class</span> <span class="ty">Node</span>&lt;E&gt; {
+    E item;
+    <span class="ty">Node</span>&lt;E&gt; next;
+    <span class="ty">Node</span>&lt;E&gt; prev;
+}
+
+<span class="cm">// [head] ↔ [Node A] ↔ [Node B] ↔ [Node C] ↔ [tail]</span></code></pre>
+
+  <h3 class="sh">Core API — List + Deque Interface</h3>
+<pre data-lang="java"><code><span class="ty">LinkedList</span>&lt;<span class="ty">String</span>&gt; queue = <span class="kw">new</span> <span class="ty">LinkedList</span>&lt;&gt;();
+
+<span class="cm">// ─── LIST OPERATIONS ──────────────────────────────────</span>
+queue.add(<span class="st">"MSG-001"</span>);        <span class="cm">// O(1) — adds to tail</span>
+queue.add(<span class="nm">0</span>, <span class="st">"MSG-000"</span>);    <span class="cm">// O(1) — adds to head (just re-wire)</span>
+queue.get(<span class="nm">5</span>);               <span class="cm">// O(n) — must traverse 5 nodes</span>
+queue.remove(<span class="nm">5</span>);            <span class="cm">// O(n) — traverse to index 5, then O(1) removal</span>
+
+<span class="cm">// ─── DEQUE OPERATIONS (head/tail — all O(1)) ──────────</span>
+queue.addFirst(<span class="st">"URGENT"</span>);  <span class="cm">// O(1)</span>
+queue.addLast(<span class="st">"NORMAL"</span>);   <span class="cm">// O(1)</span>
+queue.peekFirst();          <span class="cm">// O(1) — view head without removing</span>
+queue.peekLast();           <span class="cm">// O(1) — view tail without removing</span>
+queue.pollFirst();          <span class="cm">// O(1) — remove and return head</span>
+queue.pollLast();           <span class="cm">// O(1) — remove and return tail</span>
+queue.offerFirst(<span class="st">"PRIO"</span>);  <span class="cm">// O(1)</span>
+queue.offerLast(<span class="st">"STD"</span>);    <span class="cm">// O(1)</span>
+
+<span class="cm">// ─── STACK OPERATIONS ─────────────────────────────────</span>
+queue.push(<span class="st">"TOP"</span>);         <span class="cm">// O(1) — same as addFirst</span>
+queue.pop();                <span class="cm">// O(1) — same as removeFirst</span>
+queue.peek();               <span class="cm">// O(1) — same as peekFirst</span></code></pre>
+
+  <div class="cx-card">
+    <div class="cx-card-title">⏱ Time Complexity — LinkedList vs ArrayList</div>
+    <div class="tbl-wrap" style="margin-top:12px;">
+      <table>
+        <thead><tr><th>Operation</th><th>LinkedList</th><th>ArrayList</th><th>Winner</th></tr></thead>
+        <tbody>
+          <tr><td>get(index)</td><td><span class="cx cx-r">O(n)</span></td><td><span class="cx cx-g">O(1)</span></td><td>ArrayList</td></tr>
+          <tr><td>add(end)</td><td><span class="cx cx-g">O(1)</span></td><td><span class="cx cx-g">O(1)*</span></td><td>Tie (LL no resize risk)</td></tr>
+          <tr><td>add(beginning)</td><td><span class="cx cx-g">O(1)</span></td><td><span class="cx cx-r">O(n)</span></td><td>LinkedList</td></tr>
+          <tr><td>add(middle)</td><td><span class="cx cx-y">O(n) traverse + O(1)</span></td><td><span class="cx cx-r">O(n) shift</span></td><td>Comparable</td></tr>
+          <tr><td>remove(beginning)</td><td><span class="cx cx-g">O(1)</span></td><td><span class="cx cx-r">O(n)</span></td><td>LinkedList</td></tr>
+          <tr><td>remove(end)</td><td><span class="cx cx-g">O(1)</span></td><td><span class="cx cx-g">O(1)</span></td><td>Tie</td></tr>
+          <tr><td>Memory per element</td><td>More (3 refs per node)</td><td>Less (1 slot per element)</td><td>ArrayList</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-body">
+      <div class="callout-title">Cache Performance Warning</div>
+      <p>LinkedList nodes are <strong>scattered across heap memory</strong> — each node allocation is separate. Modern CPUs are optimised for sequential memory access (cache lines). ArrayList elements are contiguous. In practice, ArrayList often outperforms LinkedList even for operations that are theoretically O(1) for LinkedList, because of <strong>CPU cache locality</strong>. Benchmark before assuming LinkedList is faster.</p>
+    </div>
+  </div>
+
+  <h3 class="sh">Production Example — SWIFT Message Priority Queue</h3>
+<pre data-lang="java"><code><span class="cm">/**
+ * SWIFT message dispatcher using LinkedList as a Deque.
+ * High-priority messages jump to the front, normal ones go to back.
+ */</span>
+<span class="an">@Service</span>
+<span class="kw">public class</span> <span class="ty">SwiftMessageDispatcher</span> {
+
+    <span class="kw">private final</span> <span class="ty">LinkedList</span>&lt;<span class="ty">SwiftMessage</span>&gt; messageQueue = <span class="kw">new</span> <span class="ty">LinkedList</span>&lt;&gt;();
+
+    <span class="kw">public synchronized void</span> <span class="fn">enqueue</span>(<span class="ty">SwiftMessage</span> msg) {
+        <span class="kw">if</span> (msg.getPriority() == <span class="ty">Priority</span>.HIGH) {
+            messageQueue.addFirst(msg); <span class="cm">// O(1) — jump the queue</span>
+        } <span class="kw">else</span> {
+            messageQueue.addLast(msg);  <span class="cm">// O(1) — join back of queue</span>
+        }
+    }
+
+    <span class="kw">public synchronized</span> <span class="ty">Optional</span>&lt;<span class="ty">SwiftMessage</span>&gt; <span class="fn">dequeue</span>() {
+        <span class="kw">return</span> <span class="ty">Optional</span>.ofNullable(messageQueue.pollFirst()); <span class="cm">// O(1)</span>
+    }
+
+    <span class="kw">public</span> <span class="ty">Optional</span>&lt;<span class="ty">SwiftMessage</span>&gt; <span class="fn">peek</span>() {
+        <span class="kw">return</span> <span class="ty">Optional</span>.ofNullable(messageQueue.peekFirst()); <span class="cm">// O(1)</span>
+    }
+
+    <span class="kw">public int</span> <span class="fn">size</span>() { <span class="kw">return</span> messageQueue.size(); }
+}</code></pre>
+
+  <div class="practice">
+    <p><strong>Exercise 1:</strong> Implement a "recent transactions" viewer that always shows the last 10 transactions. Use LinkedList to efficiently add new transactions at the head and remove from the tail when size exceeds 10.</p>
+    <p><strong>Exercise 2:</strong> Use LinkedList to implement a browser-style "back/forward" navigation for a banking dashboard. Track the last 20 pages visited.</p>
+  </div>
+
+  <div class="takeaway">
+    <ul>
+      <li>LinkedList implements both <code>List</code> and <code>Deque</code> — it's a doubly-linked list</li>
+      <li>O(1) for head/tail operations — its core strength</li>
+      <li>O(n) for random access — its core weakness (no index arithmetic possible)</li>
+      <li>Higher memory overhead: each node stores 2 extra object references</li>
+      <li>Poor cache locality — nodes scattered in heap memory</li>
+      <li>Use when: frequent head/tail inserts/removes, implementing queues/stacks/deques</li>
+      <li>Prefer ArrayDeque over LinkedList for Stack/Queue use cases (better cache performance)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CHAPTER 4 — STACK
+═══════════════════════════════════════════════════════════ -->
+<section class="chapter" id="ch4">
+  <div class="chapter-header">
+    <div class="ch-badge">CH 04</div>
+    <div class="ch-title-block">
+      <div class="ch-goal">Master the LIFO principle and its real-world applications</div>
+      <h2 class="ch-h"><span>Stack</span> — Last In, First Out</h2>
+      <p class="ch-subtitle">Stacks are fundamental to computing — from function call management to expression parsing to undo systems.</p>
+    </div>
+  </div>
+
+  <div class="mental-model">
+    <p>A stack is like a <strong>pile of bank statements on your desk</strong>. The statement you put on last is the one you pick up first. You can only add to the top (<em>push</em>) or remove from the top (<em>pop</em>). The bottom item is the last one you'll ever reach. This is <strong>LIFO: Last In, First Out</strong>.</p>
+  </div>
+
+  <h3 class="sh">The Two Ways to Implement a Stack in Java</h3>
+
+  <div class="callout warn">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-body">
+      <div class="callout-title">Avoid java.util.Stack — Use ArrayDeque Instead</div>
+      <p><code>java.util.Stack</code> extends <code>Vector</code> (which is synchronized) and has design issues. The Java documentation itself recommends using <code>ArrayDeque</code> as a stack. ArrayDeque is faster, has a cleaner API, and is not unnecessarily synchronized.</p>
+    </div>
+  </div>
+
+<pre data-lang="java"><code><span class="cm">// ✅ Recommended — ArrayDeque as Stack</span>
+<span class="ty">Deque</span>&lt;<span class="ty">String</span>&gt; stack = <span class="kw">new</span> <span class="ty">ArrayDeque</span>&lt;&gt;();
+
+<span class="cm">// PUSH — add to top</span>
+stack.push(<span class="st">"Validate Payment"</span>);      <span class="cm">// O(1)</span>
+stack.push(<span class="st">"Check Funds"</span>);           <span class="cm">// O(1)</span>
+stack.push(<span class="st">"Apply FX Rate"</span>);         <span class="cm">// O(1)</span>
+
+<span class="cm">// PEEK — view top without removing</span>
+<span class="ty">String</span> top = stack.peek();             <span class="cm">// O(1) → "Apply FX Rate"</span>
+
+<span class="cm">// POP — remove from top</span>
+<span class="ty">String</span> step = stack.pop();             <span class="cm">// O(1) → "Apply FX Rate"</span>
+
+<span class="cm">// Other useful operations</span>
+<span class="kw">boolean</span> empty = stack.isEmpty();       <span class="cm">// O(1)</span>
+<span class="kw">int</span> sz = stack.size();                 <span class="cm">// O(1)</span>
+
+<span class="cm">// Iterates top-to-bottom (most recently pushed first)</span>
+<span class="kw">for</span> (<span class="ty">String</span> s : stack) <span class="ty">System</span>.out.println(s);</code></pre>
+
+  <div class="cx-card">
+    <div class="cx-card-title">⏱ Time Complexity — Stack (ArrayDeque)</div>
+    <div class="cx-grid">
+      <div class="cx-item"><div class="cx-item-label">push()</div><div class="cx-item-val g">O(1)</div></div>
+      <div class="cx-item"><div class="cx-item-label">pop()</div><div class="cx-item-val g">O(1)</div></div>
+      <div class="cx-item"><div class="cx-item-label">peek()</div><div class="cx-item-val g">O(1)</div></div>
+      <div class="cx-item"><div class="cx-item-label">isEmpty()</div><div class="cx-item-val g">O(1)</div></div>
+      <div class="cx-item"><div class="cx-item-label">size()</div><div class="cx-item-val g">O(1)</div></div>
+      <div class="cx-item"><div class="cx-item-label">Space</div><div class="cx-item-val y">O(n)</div></div>
+    </div>
+  </div>
+
+  <h3 class="sh">Classic Stack Problems</h3>
+
+  <h4 class="ssh">Balanced Parentheses — Common Interview Pattern</h4>
+<pre data-lang="java"><code><span class="cm">/**
+ * Validate SWIFT message structure — balanced tags.
+ * {1:...}{2:...}{3:...} must all open and close.
+ */</span>
+<span class="kw">public boolean</span> <span class="fn">isBalanced</span>(<span class="ty">String</span> expression) {
+    <span class="ty">Deque</span>&lt;<span class="ty">Character</span>&gt; stack = <span class="kw">new</span> <span class="ty">ArrayDeque</span>&lt;&gt;();
+    <span class="kw">for</span> (<span class="kw">char</span> c : expression.toCharArray()) {
+        <span class="kw">if</span> (c == <span class="st">'{'</span> || c == <span class="st">'['</span> || c == <span class="st">'('</span>) {
+            stack.push(c);
+        } <span class="kw">else if</span> (c == <span class="st">'}'</span> || c == <span class="st">']'</span> || c == <span class="st">')'</span>) {
+            <span class="kw">if</span> (stack.isEmpty()) <span class="kw">return false</span>;
+            <span class="kw">char</span> top = stack.pop();
+            <span class="kw">if</span> (!matches(top, c)) <span class="kw">return false</span>;
+        }
+    }
+    <span class="kw">return</span> stack.isEmpty();
+}
+
+<span class="kw">private boolean</span> <span class="fn">matches</span>(<span class="kw">char</span> open, <span class="kw">char</span> close) {
+    <span class="kw">return</span> (open == <span class="st">'{'</span> &amp;&amp; close == <span class="st">'}'</span>)
+        || (open == <span class="st">'['</span> &amp;&amp; close == <span class="st">']'</span>)
+        || (open == <span class="st">'('</span> &amp;&amp; close == <span class="st">')'</span>);
+}</code></pre>
+
+  <h4 class="ssh">Production Example — Transaction Rollback Stack</h4>
+<pre data-lang="java"><code><span class="cm">/**
+ * Undo/rollback mechanism for a payment processing pipeline.
+ * Each step is pushed; on failure, steps are popped and reversed.
+ */</span>
+<span class="an">@Service</span>
+<span class="kw">public class</span> <span class="ty">PaymentPipeline</span> {
+
+    <span class="kw">public</span> <span class="ty">PaymentResult</span> <span class="fn">process</span>(<span class="ty">Payment</span> payment) {
+        <span class="ty">Deque</span>&lt;<span class="ty">Runnable</span>&gt; rollbackStack = <span class="kw">new</span> <span class="ty">ArrayDeque</span>&lt;&gt;();
+
+        <span class="kw">try</span> {
+            <span class="cm">// Step 1</span>
+            reserveFunds(payment);
+            rollbackStack.push(() -> releaseFunds(payment));
+
+            <span class="cm">// Step 2</span>
+            convertCurrency(payment);
+            rollbackStack.push(() -> reverseConversion(payment));
+
+            <span class="cm">// Step 3</span>
+            sendSwiftMessage(payment);
+            rollbackStack.push(() -> cancelSwiftMessage(payment));
+
+            <span class="kw">return</span> <span class="ty">PaymentResult</span>.success();
+
+        } <span class="kw">catch</span> (<span class="ty">Exception</span> e) {
+            <span class="cm">// Roll back in reverse order — LIFO!</span>
+            <span class="kw">while</span> (!rollbackStack.isEmpty()) {
+                <span class="kw">try</span> { rollbackStack.pop().run(); }
+                <span class="kw">catch</span> (<span class="ty">Exception</span> re) { log.error(<span class="st">"Rollback failed"</span>, re); }
+            }
+            <span class="kw">return</span> <span class="ty">PaymentResult</span>.failure(e.getMessage());
+        }
+    }
+}</code></pre>
+
+  <div class="practice">
+    <p><strong>Exercise 1:</strong> Implement a stack-based expression evaluator that can process simple arithmetic expressions like "3 + 4 * 2" using two stacks — one for operands and one for operators.</p>
+    <p><strong>Exercise 2:</strong> Design an "audit trail" system using a stack that tracks the last 10 operations performed on a bank account. Implement undo() to reverse the most recent operation.</p>
+  </div>
+
+  <div class="takeaway">
+    <ul>
+      <li>Stack = LIFO — Last In, First Out. Push to top, pop from top.</li>
+      <li>Use <code>ArrayDeque</code> not <code>java.util.Stack</code> — faster, non-synchronized, cleaner API</li>
+      <li>All core operations (push, pop, peek) are O(1)</li>
+      <li>Classic uses: undo systems, expression parsing, function call management, DFS traversal, rollback mechanisms</li>
+      <li>The JVM itself uses a stack to manage method calls — every method invocation is a push</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CHAPTER 5 — QUEUE & DEQUE
+═══════════════════════════════════════════════════════════ -->
+<section class="chapter" id="ch5">
+  <div class="chapter-header">
+    <div class="ch-badge">CH 05</div>
+    <div class="ch-title-block">
+      <div class="ch-goal">Understand FIFO ordering and ArrayDeque as the best all-round implementation</div>
+      <h2 class="ch-h"><span>Queue &amp; Deque</span> — Processing in Order</h2>
+      <p class="ch-subtitle">Queues model real-world waiting lines. Deques extend this with operations on both ends, enabling both stack and queue behaviour.</p>
+    </div>
+  </div>
+
+  <div class="mental-model">
+    <p>A Queue is a <strong>bank teller queue</strong>. Customers join at the back and are served from the front. First come, first served — <strong>FIFO: First In, First Out</strong>. A Deque (double-ended queue) allows entry and exit at <em>both</em> the front and back — like a VIP bypass lane on both sides of the queue.</p>
+  </div>
+
+  <h3 class="sh">Queue Interface & Implementations</h3>
+<pre data-lang="java"><code><span class="cm">// ✅ Best general-purpose Queue/Deque implementation</span>
+<span class="ty">Queue</span>&lt;<span class="ty">String</span>&gt; queue = <span class="kw">new</span> <span class="ty">ArrayDeque</span>&lt;&gt;();
+
+<span class="cm">// ─── QUEUE API ────────────────────────────────────────</span>
+<span class="cm">// Two flavors: throws exceptions | returns null/false</span>
+
+queue.add(<span class="st">"MSG-001"</span>);       <span class="cm">// throws if capacity exceeded</span>
+queue.offer(<span class="st">"MSG-002"</span>);     <span class="cm">// ✅ preferred — returns false if full</span>
+
+queue.remove();              <span class="cm">// throws NoSuchElementException if empty</span>
+queue.poll();                <span class="cm">// ✅ preferred — returns null if empty</span>
+
+queue.element();             <span class="cm">// throws if empty</span>
+queue.peek();                <span class="cm">// ✅ preferred — returns null if empty</span>
+
+<span class="cm">// ─── DEQUE API ────────────────────────────────────────</span>
+<span class="ty">Deque</span>&lt;<span class="ty">String</span>&gt; deque = <span class="kw">new</span> <span class="ty">ArrayDeque</span>&lt;&gt;();
+
+deque.offerFirst(<span class="st">"URGENT"</span>); <span class="cm">// O(1) — add to front</span>
+deque.offerLast(<span class="st">"NORMAL"</span>);  <span class="cm">// O(1) — add to back</span>
+deque.pollFirst();           <span class="cm">// O(1) — remove from front</span>
+deque.pollLast();            <span class="cm">// O(1) — remove from back</span>
+deque.peekFirst();           <span class="cm">// O(1) — view front</span>
+deque.peekLast();            <span class="cm">// O(1) — view back</span></code></pre>
+
+  <h3 class="sh">ArrayDeque — The Preferred Implementation</h3>
+  <p>ArrayDeque uses a <strong>circular buffer</strong> (a resizable array with head and tail pointers) internally. This means all head and tail operations are O(1) without the cache-miss problem of LinkedList. It's the go-to implementation for both Queue and Stack use cases.</p>
+
+  <div class="cx-card">
+    <div class="cx-card-title">⏱ Time Complexity — ArrayDeque</div>
+    <div class="cx-grid">
+      <div class="cx-item"><div class="cx-item-label">offer / offerLast</div><div class="cx-item-val g">O(1)*</div></div>
+      <div class="cx-item"><div class="cx-item-label">poll / pollFirst</div><div class="cx-item-val g">O(1)</div></div>
+      <div class="cx-item"><div class="cx-item-label">offerFirst</div><div class="cx-item-val g">O(1)*</div></div>
+      <div class="cx-item"><div class="cx-item-label">pollLast</div><div class="cx-item-val g">O(1)</div></div>
+      <div class="cx-item"><div class="cx-item-label">peek/peekFirst</div><div class="cx-item-val g">O(1)</div></div>
+      <div class="cx-item"><div class="cx-item-label">size</div><div class="cx-item-val g">O(1)</div></div>
+    </div>
+    <p style="font-size:12px;color:#6b7280;margin-top:12px;">* Amortised O(1) — occasional resize</p>
+  </div>
+
+  <h3 class="sh">Production Example — SEPA Payment Processing Queue</h3>
+<pre data-lang="java"><code><span class="cm">/**
+ * SEPA payment batch processor using a queue to ensure FIFO
+ * processing of payment instructions within a settlement window.
+ */</span>
+<span class="an">@Service</span>
+<span class="kw">public class</span> <span class="ty">SepaPaymentProcessor</span> {
+
+    <span class="kw">private final</span> <span class="ty">Queue</span>&lt;<span class="ty">SepaPayment</span>&gt; pending = <span class="kw">new</span> <span class="ty">ArrayDeque</span>&lt;&gt;();
+    <span class="kw">private final</span> <span class="ty">List</span>&lt;<span class="ty">SepaPayment</span>&gt; processed = <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;();
+
+    <span class="kw">public void</span> <span class="fn">submitPayment</span>(<span class="ty">SepaPayment</span> payment) {
+        pending.offer(payment);   <span class="cm">// O(1) — join queue</span>
+        log.info(<span class="st">"Queued: {}"</span>, payment.getRef());
+    }
+
+    <span class="an">@Scheduled</span>(fixedDelay = <span class="nm">5000</span>)
+    <span class="kw">public void</span> <span class="fn">processBatch</span>() {
+        <span class="kw">int</span> batchLimit = <span class="nm">100</span>;
+        <span class="kw">int</span> count = <span class="nm">0</span>;
+
+        <span class="ty">SepaPayment</span> payment;
+        <span class="kw">while</span> (count &lt; batchLimit &amp;&amp; (payment = pending.poll()) != <span class="kw">null</span>) {
+            <span class="kw">try</span> {
+                settlePayment(payment);
+                processed.add(payment);
+                count++;
+            } <span class="kw">catch</span> (<span class="ty">Exception</span> e) {
+                <span class="cm">// re-queue with retry count</span>
+                <span class="kw">if</span> (payment.getRetries() &lt; <span class="nm">3</span>) {
+                    payment.incrementRetries();
+                    pending.offer(payment);
+                }
+            }
+        }
+        log.info(<span class="st">"Batch processed: {} payments"</span>, count);
+    }
+}</code></pre>
+
+  <div class="practice">
+    <p><strong>Exercise 1:</strong> Implement a "sliding window" rate limiter for API calls using a Queue. The window should track the last N requests and reject requests when the limit is exceeded.</p>
+    <p><strong>Exercise 2:</strong> Use a Deque to implement a cache that evicts from the least-recently-used end (LRU concept — preview of a real interview problem).</p>
+  </div>
+
+  <div class="takeaway">
+    <ul>
+      <li>Queue = FIFO — First In, First Out. Offer at tail, poll from head.</li>
+      <li>Use <code>ArrayDeque</code> for both Queue and Stack — it's the best general-purpose implementation</li>
+      <li>Prefer <code>offer/poll/peek</code> (null-returning) over <code>add/remove/element</code> (exception-throwing)</li>
+      <li>Deque = double-ended queue — supports O(1) operations on both ends</li>
+      <li>LinkedList also implements Deque but ArrayDeque is faster (better cache locality)</li>
+      <li>For thread-safe queues: <code>LinkedBlockingQueue</code>, <code>ConcurrentLinkedQueue</code></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CHAPTER 6 — HASHMAP
+═══════════════════════════════════════════════════════════ -->
+<section class="chapter" id="ch6">
+  <div class="chapter-header">
+    <div class="ch-badge">CH 06</div>
+    <div class="ch-title-block">
+      <div class="ch-goal">Master the most powerful and widely-used data structure in Java</div>
+      <h2 class="ch-h"><span>HashMap</span> — The Lookup Engine</h2>
+      <p class="ch-subtitle">HashMap gives you O(1) average lookups, inserts, and deletes. Understanding its internals is essential for every Java engineer.</p>
+    </div>
+  </div>
+
+  <div class="mental-model">
+    <p>HashMap is like a <strong>bank with 16 vault rooms</strong>, numbered 0–15. When you open an account, the system hashes your account number to decide <em>which room</em> your file goes in. Later, to find your file, it hashes your number again — jumps to the same room — and retrieves it instantly. No need to search all 16 rooms. <strong>The hash function is the magic: same input → always same room</strong>. When two accounts hash to the same room, they're stored together in a small list (a <em>bucket</em>).</p>
+  </div>
+
+  <h3 class="sh">Internal Mechanics — How HashMap Works</h3>
+  <p>HashMap internally uses an <strong>array of buckets</strong>. Each bucket is a linked list (or, since Java 8, a red-black tree when a bucket has ≥8 entries). The array starts with 16 slots. When the load factor (default 0.75) is exceeded — i.e., 75% of buckets are occupied — the map <strong>rehashes</strong>: doubles the array size and redistributes all entries.</p>
+
+<pre data-lang="java"><code><span class="cm">// ── Step by step of put("ACCT-001", 5000) ──
+// 1. hash = "ACCT-001".hashCode()  →  some integer
+// 2. bucket_index = hash & (capacity - 1)   →  e.g., 7
+// 3. go to array[7], add the entry to the bucket's list
+// 4. if bucket_list.size() >= 8 → convert to red-black tree (Java 8+)
+// 5. if (size / capacity) > 0.75 → rehash: double capacity, redistribute</span></code></pre>
+
+  <h3 class="sh">Complete API with All Methods</h3>
+<pre data-lang="java"><code><span class="ty">Map</span>&lt;<span class="ty">String</span>, <span class="ty">BigDecimal</span>&gt; accountBalances = <span class="kw">new</span> <span class="ty">HashMap</span>&lt;&gt;();
+
+<span class="cm">// ─── INSERTING ─────────────────────────────────────────</span>
+accountBalances.put(<span class="st">"ACC-001"</span>, <span class="kw">new</span> <span class="ty">BigDecimal</span>(<span class="st">"10000.00"</span>));  <span class="cm">// O(1) avg</span>
+accountBalances.putIfAbsent(<span class="st">"ACC-002"</span>, <span class="ty">BigDecimal</span>.ZERO);     <span class="cm">// O(1) — only if absent</span>
+accountBalances.putAll(otherMap);                               <span class="cm">// O(m) — copy another map</span>
+
+<span class="cm">// ─── READING ───────────────────────────────────────────</span>
+<span class="ty">BigDecimal</span> bal = accountBalances.get(<span class="st">"ACC-001"</span>);             <span class="cm">// O(1) avg</span>
+<span class="ty">BigDecimal</span> safe = accountBalances.getOrDefault(              <span class="cm">// O(1) — no NPE risk</span>
+    <span class="st">"ACC-999"</span>, <span class="ty">BigDecimal</span>.ZERO);
+<span class="kw">boolean</span> hasAcc = accountBalances.containsKey(<span class="st">"ACC-001"</span>);    <span class="cm">// O(1) avg</span>
+<span class="kw">boolean</span> hasVal = accountBalances.containsValue(              <span class="cm">// O(n) — full scan!</span>
+    <span class="kw">new</span> <span class="ty">BigDecimal</span>(<span class="st">"10000.00"</span>));
+
+<span class="cm">// ─── UPDATING ──────────────────────────────────────────</span>
+accountBalances.replace(<span class="st">"ACC-001"</span>, <span class="kw">new</span> <span class="ty">BigDecimal</span>(<span class="st">"12000"</span>)); <span class="cm">// O(1)</span>
+
+<span class="cm">// compute — powerful: create/update in one operation</span>
+accountBalances.compute(<span class="st">"ACC-001"</span>, (key, existing) -&gt;
+    existing == <span class="kw">null</span> ? <span class="ty">BigDecimal</span>.ZERO : existing.add(<span class="kw">new</span> <span class="ty">BigDecimal</span>(<span class="st">"500"</span>))
+);
+
+<span class="cm">// computeIfAbsent — great for initialising nested maps</span>
+<span class="ty">Map</span>&lt;<span class="ty">String</span>, <span class="ty">List</span>&lt;<span class="ty">Transaction</span>&gt;&gt; byAccount = <span class="kw">new</span> <span class="ty">HashMap</span>&lt;&gt;();
+byAccount.computeIfAbsent(<span class="st">"ACC-001"</span>, k -&gt; <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;())
+         .add(newTransaction);
+
+<span class="cm">// merge — aggregate values elegantly</span>
+<span class="ty">Map</span>&lt;<span class="ty">String</span>, <span class="ty">BigDecimal</span>&gt; totals = <span class="kw">new</span> <span class="ty">HashMap</span>&lt;&gt;();
+transactions.forEach(tx -&gt;
+    totals.merge(tx.getCurrency(), tx.getAmount(), <span class="ty">BigDecimal</span>::add)
+);
+
+<span class="cm">// ─── REMOVING ──────────────────────────────────────────</span>
+accountBalances.remove(<span class="st">"ACC-001"</span>);                          <span class="cm">// O(1) avg</span>
+accountBalances.remove(<span class="st">"ACC-001"</span>, <span class="kw">new</span> <span class="ty">BigDecimal</span>(<span class="st">"10000"</span>)); <span class="cm">// conditional</span>
+
+<span class="cm">// ─── ITERATING ─────────────────────────────────────────</span>
+<span class="cm">// Best practice: entrySet iteration</span>
+<span class="kw">for</span> (<span class="ty">Map</span>.<span class="ty">Entry</span>&lt;<span class="ty">String</span>, <span class="ty">BigDecimal</span>&gt; entry : accountBalances.entrySet()) {
+    <span class="ty">System</span>.out.printf(<span class="st">"%s → %s%n"</span>, entry.getKey(), entry.getValue());
+}
+
+<span class="cm">// Lambda style</span>
+accountBalances.forEach((acc, bal2) -&gt; process(acc, bal2));
+
+<span class="cm">// Keys only / Values only</span>
+<span class="ty">Set</span>&lt;<span class="ty">String</span>&gt; keys = accountBalances.keySet();     <span class="cm">// O(1) — view</span>
+<span class="ty">Collection</span>&lt;<span class="ty">BigDecimal</span>&gt; vals = accountBalances.values(); <span class="cm">// O(1) — view</span>
+
+<span class="cm">// ─── SIZE ──────────────────────────────────────────────</span>
+<span class="kw">int</span> sz = accountBalances.size();   <span class="cm">// O(1)</span>
+<span class="kw">boolean</span> mt = accountBalances.isEmpty(); <span class="cm">// O(1)</span></code></pre>
+
+  <div class="cx-card">
+    <div class="cx-card-title">⏱ Time Complexity — HashMap</div>
+    <div class="cx-grid">
+      <div class="cx-item"><div class="cx-item-label">get(key)</div><div class="cx-item-val g">O(1) avg</div></div>
+      <div class="cx-item"><div class="cx-item-label">put(key, val)</div><div class="cx-item-val g">O(1) avg</div></div>
+      <div class="cx-item"><div class="cx-item-label">remove(key)</div><div class="cx-item-val g">O(1) avg</div></div>
+      <div class="cx-item"><div class="cx-item-label">containsKey()</div><div class="cx-item-val g">O(1) avg</div></div>
+      <div class="cx-item"><div class="cx-item-label">containsValue()</div><div class="cx-item-val r">O(n)</div></div>
+      <div class="cx-item"><div class="cx-item-label">Worst case (all collisions)</div><div class="cx-item-val r">O(n)</div></div>
+    </div>
+  </div>
+
+  <h3 class="sh">Critical Concepts</h3>
+
+  <h4 class="ssh">hashCode() and equals() — The Contract</h4>
+  <div class="callout danger">
+    <div class="callout-icon">🔴</div>
+    <div class="callout-body">
+      <div class="callout-title">The Most Important Rule in Java Collections</div>
+      <p>If two objects are <strong>equal</strong> (via <code>equals()</code>), they MUST have the <strong>same hashCode()</strong>. If you override <code>equals()</code>, you MUST override <code>hashCode()</code>. Violating this breaks HashMap, HashSet, and any hash-based collection.</p>
+    </div>
+  </div>
+
+<pre data-lang="java"><code><span class="cm">// ❌ BAD — Override equals without hashCode</span>
+<span class="kw">class</span> <span class="ty">AccountKey</span> {
+    <span class="ty">String</span> id;
+    <span class="an">@Override</span> <span class="kw">public boolean</span> <span class="fn">equals</span>(<span class="ty">Object</span> o) { ... } <span class="cm">// ✓</span>
+    <span class="cm">// hashCode() missing! → puts into wrong bucket → can't find entry</span>
+}
+
+<span class="cm">// ✅ GOOD — Using Lombok or IDE-generated</span>
+<span class="an">@EqualsAndHashCode</span>
+<span class="kw">class</span> <span class="ty">AccountKey</span> {
+    <span class="ty">String</span> id;
+    <span class="ty">String</span> currency;
+}</code></pre>
+
+  <h3 class="sh">Production Example — Account Balance Cache</h3>
+<pre data-lang="java"><code><span class="an">@Service</span>
+<span class="kw">public class</span> <span class="ty">BalanceCacheService</span> {
+
+    <span class="kw">private final</span> <span class="ty">Map</span>&lt;<span class="ty">String</span>, <span class="ty">AccountBalance</span>&gt; cache = <span class="kw">new</span> <span class="ty">HashMap</span>&lt;&gt;(<span class="nm">2048</span>);
+
+    <span class="cm">// Aggregate total balance by currency using merge()</span>
+    <span class="kw">public</span> <span class="ty">Map</span>&lt;<span class="ty">String</span>, <span class="ty">BigDecimal</span>&gt; <span class="fn">totalByCurrency</span>(
+            <span class="ty">List</span>&lt;<span class="ty">AccountBalance</span>&gt; accounts) {
+
+        <span class="ty">Map</span>&lt;<span class="ty">String</span>, <span class="ty">BigDecimal</span>&gt; totals = <span class="kw">new</span> <span class="ty">HashMap</span>&lt;&gt;();
+        accounts.forEach(acc -&gt;
+            totals.merge(acc.getCurrency(), acc.getBalance(), <span class="ty">BigDecimal</span>::add)
+        );
+        <span class="kw">return</span> totals;
+    }
+
+    <span class="cm">// Lazy-load balance from DB using computeIfAbsent</span>
+    <span class="kw">public</span> <span class="ty">AccountBalance</span> <span class="fn">getBalance</span>(<span class="ty">String</span> accountId) {
+        <span class="kw">return</span> cache.computeIfAbsent(accountId, id -&gt; balanceRepo.findById(id)
+            .orElseThrow(() -&gt; <span class="kw">new</span> <span class="ty">AccountNotFoundException</span>(id)));
+    }
+
+    <span class="cm">// Group transactions by account</span>
+    <span class="kw">public</span> <span class="ty">Map</span>&lt;<span class="ty">String</span>, <span class="ty">List</span>&lt;<span class="ty">Transaction</span>&gt;&gt; <span class="fn">groupByAccount</span>(
+            <span class="ty">List</span>&lt;<span class="ty">Transaction</span>&gt; txns) {
+        <span class="kw">return</span> txns.stream().collect(
+            <span class="ty">Collectors</span>.groupingBy(<span class="ty">Transaction</span>::getAccountId)
+        );
+    }
+}</code></pre>
+
+  <div class="practice">
+    <p><strong>Exercise 1:</strong> Given a list of ISO 20022 pain.001 payment messages, write a method using HashMap to find any duplicate EndToEndId values — a compliance requirement.</p>
+    <p><strong>Exercise 2:</strong> Build a frequency map of SWIFT message types (MT101, MT202, MT103, etc.) from a log of message strings. Find the most-frequent message type.</p>
+    <p><strong>Exercise 3:</strong> Implement a two-sum problem variant: given a list of transaction amounts and a target, find any two transactions that sum to the target. Use O(n) time with a HashMap.</p>
+  </div>
+
+  <div class="takeaway">
+    <ul>
+      <li>HashMap offers O(1) average time for get, put, remove — its defining feature</li>
+      <li>Internally: array of buckets → linked list → red-black tree (Java 8+) on collision</li>
+      <li>Always override <code>hashCode()</code> when overriding <code>equals()</code></li>
+      <li>Default capacity = 16, load factor = 0.75 — rehashes at 75% fill</li>
+      <li>Pre-size with <code>new HashMap&lt;&gt;(expectedSize / 0.75 + 1)</code> to avoid rehashes</li>
+      <li><code>compute()</code>, <code>merge()</code>, <code>computeIfAbsent()</code> are your power tools for aggregation</li>
+      <li>Not thread-safe — use <code>ConcurrentHashMap</code> in multi-threaded environments</li>
+      <li>Does NOT guarantee iteration order</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CHAPTER 7 — LINKEDHASHMAP
+═══════════════════════════════════════════════════════════ -->
+<section class="chapter" id="ch7">
+  <div class="chapter-header">
+    <div class="ch-badge">CH 07</div>
+    <div class="ch-title-block">
+      <div class="ch-goal">Get HashMap performance with predictable iteration order</div>
+      <h2 class="ch-h"><span>LinkedHashMap</span> — Ordered HashMap</h2>
+      <p class="ch-subtitle">LinkedHashMap = HashMap + insertion-order doubly linked list. O(1) lookups with predictable iteration — powerful for LRU caches.</p>
+    </div>
+  </div>
+
+  <div class="mental-model">
+    <p>LinkedHashMap is a <strong>HashMap that also keeps a guest registry</strong>. Every time an account is added, its name is written into the registry in order. When you iterate the map, you follow the registry's order — not the random bucket order. The hash lookup is still instant; the registry just records who arrived when.</p>
+  </div>
+
+<pre data-lang="java"><code><span class="cm">// Insertion-order (default)</span>
+<span class="ty">Map</span>&lt;<span class="ty">String</span>, <span class="ty">Integer</span>&gt; ordered = <span class="kw">new</span> <span class="ty">LinkedHashMap</span>&lt;&gt;();
+ordered.put(<span class="st">"EUR"</span>, <span class="nm">1</span>);
+ordered.put(<span class="st">"USD"</span>, <span class="nm">2</span>);
+ordered.put(<span class="st">"GBP"</span>, <span class="nm">3</span>);
+<span class="cm">// Iterates: EUR → USD → GBP (insertion order preserved)</span>
+
+<span class="cm">// Access-order — moves most recently accessed to end</span>
+<span class="ty">Map</span>&lt;<span class="ty">String</span>, <span class="ty">Integer</span>&gt; accessOrdered = <span class="kw">new</span> <span class="ty">LinkedHashMap</span>&lt;&gt;(
+    <span class="nm">16</span>, <span class="nm">0.75f</span>, <span class="kw">true</span>  <span class="cm">// true = access-order mode</span>
+);
+
+<span class="cm">// ─── LRU CACHE using LinkedHashMap ────────────────────</span>
+<span class="kw">int</span> MAX_ENTRIES = <span class="nm">100</span>;
+<span class="ty">Map</span>&lt;<span class="ty">String</span>, <span class="ty">AccountBalance</span>&gt; lruCache = <span class="kw">new</span> <span class="ty">LinkedHashMap</span>&lt;&gt;(
+        MAX_ENTRIES, <span class="nm">0.75f</span>, <span class="kw">true</span>) {
+    <span class="an">@Override</span>
+    <span class="kw">protected boolean</span> <span class="fn">removeEldestEntry</span>(<span class="ty">Map</span>.<span class="ty">Entry</span>&lt;<span class="ty">String</span>, <span class="ty">AccountBalance</span>&gt; eldest) {
+        <span class="kw">return</span> size() &gt; MAX_ENTRIES; <span class="cm">// evict oldest when full</span>
+    }
+};
+
+<span class="cm">// Usage: identical to HashMap API</span>
+lruCache.put(<span class="st">"ACC-001"</span>, balance1);
+<span class="ty">AccountBalance</span> b = lruCache.get(<span class="st">"ACC-001"</span>); <span class="cm">// moves to most-recently-used</span></code></pre>
+
+  <div class="cx-card">
+    <div class="cx-card-title">⏱ Time Complexity — LinkedHashMap</div>
+    <div class="cx-grid">
+      <div class="cx-item"><div class="cx-item-label">get / put / remove</div><div class="cx-item-val g">O(1) avg</div></div>
+      <div class="cx-item"><div class="cx-item-label">Iteration</div><div class="cx-item-val y">O(n)</div></div>
+      <div class="cx-item"><div class="cx-item-label">Space overhead</div><div class="cx-item-val y">O(n) extra</div></div>
+    </div>
+    <p style="margin-top:12px;font-size:14px;color:#4b5563;">All HashMap operations remain O(1). Slightly more memory than HashMap due to the linked list maintained for ordering.</p>
+  </div>
+
+  <div class="takeaway">
+    <ul>
+      <li>LinkedHashMap = HashMap + doubly-linked list for ordering</li>
+      <li>Two modes: <strong>insertion-order</strong> (default) and <strong>access-order</strong> (set via constructor)</li>
+      <li>Override <code>removeEldestEntry()</code> to build a simple, powerful LRU cache</li>
+      <li>Use when you need HashMap performance + predictable/ordered iteration</li>
+      <li>Slightly slower and more memory-hungry than HashMap due to link maintenance</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CHAPTER 8 — TREEMAP
+═══════════════════════════════════════════════════════════ -->
+<section class="chapter" id="ch8">
+  <div class="chapter-header">
+    <div class="ch-badge">CH 08</div>
+    <div class="ch-title-block">
+      <div class="ch-goal">Master sorted maps and range queries with TreeMap</div>
+      <h2 class="ch-h"><span>TreeMap</span> — Sorted Navigation</h2>
+      <p class="ch-subtitle">TreeMap maintains keys in sorted order using a red-black tree. The tradeoff: O(log n) instead of O(1), but you gain powerful range and navigation operations.</p>
+    </div>
+  </div>
+
+  <div class="mental-model">
+    <p>TreeMap is like a <strong>bank's sorted ledger book</strong> where accounts are listed in alphabetical order. Finding an account by name is O(log n) — you open to the middle, check if you need the left or right half, and repeat. The payoff: you can ask "give me all accounts between 'A' and 'G'" in O(log n + k) — impossible with HashMap.</p>
+  </div>
+
+<pre data-lang="java"><code><span class="cm">// Natural key ordering (keys must implement Comparable)</span>
+<span class="ty">TreeMap</span>&lt;<span class="ty">String</span>, <span class="ty">BigDecimal</span>&gt; rates = <span class="kw">new</span> <span class="ty">TreeMap</span>&lt;&gt;();
+rates.put(<span class="st">"EUR/USD"</span>, <span class="kw">new</span> <span class="ty">BigDecimal</span>(<span class="st">"1.0845"</span>));
+rates.put(<span class="st">"GBP/USD"</span>, <span class="kw">new</span> <span class="ty">BigDecimal</span>(<span class="st">"1.2731"</span>));
+rates.put(<span class="st">"USD/JPY"</span>, <span class="kw">new</span> <span class="ty">BigDecimal</span>(<span class="st">"155.20"</span>));
+<span class="cm">// Iterates in lexicographic order: EUR/USD → GBP/USD → USD/JPY</span>
+
+<span class="cm">// Custom ordering — by value date for settlement schedule</span>
+<span class="ty">TreeMap</span>&lt;<span class="ty">LocalDate</span>, <span class="ty">List</span>&lt;<span class="ty">Payment</span>&gt;&gt; schedule = <span class="kw">new</span> <span class="ty">TreeMap</span>&lt;&gt;();
+
+<span class="cm">// ─── NAVIGATION API — TreeMap's superpower ─────────────</span>
+rates.firstKey();                         <span class="cm">// O(log n) — smallest key</span>
+rates.lastKey();                          <span class="cm">// O(log n) — largest key</span>
+rates.floorKey(<span class="st">"H"</span>);                    <span class="cm">// O(log n) — greatest key ≤ "H"</span>
+rates.ceilingKey(<span class="st">"G"</span>);                  <span class="cm">// O(log n) — smallest key ≥ "G"</span>
+rates.lowerKey(<span class="st">"G"</span>);                    <span class="cm">// O(log n) — greatest key strictly < "G"</span>
+rates.higherKey(<span class="st">"G"</span>);                   <span class="cm">// O(log n) — smallest key strictly > "G"</span>
+
+<span class="cm">// Range views — incredibly powerful for date ranges</span>
+<span class="ty">SortedMap</span>&lt;<span class="ty">String</span>, <span class="ty">BigDecimal</span>&gt; sub = rates.subMap(<span class="st">"E"</span>, <span class="st">"U"</span>); <span class="cm">// [E, U)</span>
+<span class="ty">SortedMap</span>&lt;<span class="ty">String</span>, <span class="ty">BigDecimal</span>&gt; head = rates.headMap(<span class="st">"H"</span>);    <span class="cm">// everything before "H"</span>
+<span class="ty">SortedMap</span>&lt;<span class="ty">String</span>, <span class="ty">BigDecimal</span>&gt; tail = rates.tailMap(<span class="st">"H"</span>);    <span class="cm">// everything from "H" onwards</span>
+
+<span class="cm">// Descending view</span>
+<span class="ty">NavigableMap</span>&lt;<span class="ty">String</span>, <span class="ty">BigDecimal</span>&gt; desc = rates.descendingMap();</code></pre>
+
+  <div class="cx-card">
+    <div class="cx-card-title">⏱ Time Complexity — TreeMap</div>
+    <div class="cx-grid">
+      <div class="cx-item"><div class="cx-item-label">get / put / remove</div><div class="cx-item-val y">O(log n)</div></div>
+      <div class="cx-item"><div class="cx-item-label">containsKey</div><div class="cx-item-val y">O(log n)</div></div>
+      <div class="cx-item"><div class="cx-item-label">firstKey / lastKey</div><div class="cx-item-val y">O(log n)</div></div>
+      <div class="cx-item"><div class="cx-item-label">floorKey / ceilingKey</div><div class="cx-item-val y">O(log n)</div></div>
+      <div class="cx-item"><div class="cx-item-label">subMap / headMap / tailMap</div><div class="cx-item-val y">O(log n)</div></div>
+      <div class="cx-item"><div class="cx-item-label">Iteration (all entries)</div><div class="cx-item-val y">O(n)</div></div>
+    </div>
+  </div>
+
+  <h3 class="sh">Production Example — Settlement Schedule</h3>
+<pre data-lang="java"><code><span class="an">@Service</span>
+<span class="kw">public class</span> <span class="ty">SettlementScheduleService</span> {
+
+    <span class="cm">// TreeMap keeps settlement dates sorted automatically</span>
+    <span class="kw">private final</span> <span class="ty">TreeMap</span>&lt;<span class="ty">LocalDate</span>, <span class="ty">List</span>&lt;<span class="ty">Payment</span>&gt;&gt; schedule =
+        <span class="kw">new</span> <span class="ty">TreeMap</span>&lt;&gt;();
+
+    <span class="kw">public void</span> <span class="fn">schedulePayment</span>(<span class="ty">Payment</span> p) {
+        schedule.computeIfAbsent(p.getValueDate(), k -&gt; <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;())
+                .add(p);
+    }
+
+    <span class="cm">// Get all payments due TODAY and earlier</span>
+    <span class="kw">public</span> <span class="ty">Map</span>&lt;<span class="ty">LocalDate</span>, <span class="ty">List</span>&lt;<span class="ty">Payment</span>&gt;&gt; <span class="fn">getDuePayments</span>() {
+        <span class="kw">return</span> schedule.headMap(<span class="ty">LocalDate</span>.now().plusDays(<span class="nm">1</span>)); <span class="cm">// O(log n)</span>
+    }
+
+    <span class="cm">// Get next upcoming settlement date</span>
+    <span class="kw">public</span> <span class="ty">Optional</span>&lt;<span class="ty">LocalDate</span>&gt; <span class="fn">nextSettlementDate</span>() {
+        <span class="ty">LocalDate</span> tomorrow = <span class="ty">LocalDate</span>.now().plusDays(<span class="nm">1</span>);
+        <span class="kw">return</span> <span class="ty">Optional</span>.ofNullable(schedule.ceilingKey(tomorrow));
+    }
+}</code></pre>
+
+  <div class="takeaway">
+    <ul>
+      <li>TreeMap is backed by a <strong>red-black tree</strong> — self-balancing binary search tree</li>
+      <li>Keys are always sorted — either naturally (Comparable) or via a custom Comparator</li>
+      <li>All operations are O(log n) — slower than HashMap but with sorted-order guarantees</li>
+      <li>Navigation methods (<code>floor</code>, <code>ceiling</code>, <code>higher</code>, <code>lower</code>) are its superpower</li>
+      <li>Range views (<code>subMap</code>, <code>headMap</code>, <code>tailMap</code>) are live views — changes reflect in the original</li>
+      <li>Use for: date-keyed schedules, range lookups, ordered event logs, rank-based lookups</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CHAPTER 9, 10, 11 — SETS
+═══════════════════════════════════════════════════════════ -->
+<section class="chapter" id="ch9">
+  <div class="chapter-header">
+    <div class="ch-badge">CH 09–11</div>
+    <div class="ch-title-block">
+      <div class="ch-goal">Master uniqueness constraints with HashSet, LinkedHashSet, and TreeSet</div>
+      <h2 class="ch-h"><span>Sets</span> — Uniqueness at Scale</h2>
+      <p class="ch-subtitle">Sets are collections that guarantee uniqueness. Three implementations cover the three ordering needs: none, insertion, and sorted.</p>
+    </div>
+  </div>
+
+  <div class="mental-model">
+    <p>A Set is like a <strong>bank's unique customer registry</strong>. You can add a customer, but <strong>if they're already registered, nothing changes</strong> — no duplicates allowed. HashSet lets you add/check in O(1). TreeSet keeps the registry alphabetically sorted. LinkedHashSet remembers the order customers first registered.</p>
+  </div>
+
+  <h3 id="ch9-inner" class="sh">HashSet — Fast Uniqueness (O(1))</h3>
+<pre data-lang="java"><code><span class="ty">Set</span>&lt;<span class="ty">String</span>&gt; processedIds = <span class="kw">new</span> <span class="ty">HashSet</span>&lt;&gt;();
+
+<span class="cm">// ─── CORE API ─────────────────────────────────────────</span>
+processedIds.add(<span class="st">"TXN-001"</span>);        <span class="cm">// O(1) — returns true if added, false if duplicate</span>
+processedIds.contains(<span class="st">"TXN-001"</span>);   <span class="cm">// O(1) — fast membership test</span>
+processedIds.remove(<span class="st">"TXN-001"</span>);     <span class="cm">// O(1)</span>
+processedIds.size();                  <span class="cm">// O(1)</span>
+processedIds.isEmpty();               <span class="cm">// O(1)</span>
+
+<span class="cm">// ─── SET OPERATIONS ───────────────────────────────────</span>
+<span class="ty">Set</span>&lt;<span class="ty">String</span>&gt; a = <span class="kw">new</span> <span class="ty">HashSet</span>&lt;&gt;(<span class="ty">Set</span>.of(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>));
+<span class="ty">Set</span>&lt;<span class="ty">String</span>&gt; b = <span class="kw">new</span> <span class="ty">HashSet</span>&lt;&gt;(<span class="ty">Set</span>.of(<span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>));
+
+<span class="cm">// Union: a ∪ b</span>
+<span class="ty">Set</span>&lt;<span class="ty">String</span>&gt; union = <span class="kw">new</span> <span class="ty">HashSet</span>&lt;&gt;(a);
+union.addAll(b); <span class="cm">// {A, B, C, D}</span>
+
+<span class="cm">// Intersection: a ∩ b</span>
+<span class="ty">Set</span>&lt;<span class="ty">String</span>&gt; intersection = <span class="kw">new</span> <span class="ty">HashSet</span>&lt;&gt;(a);
+intersection.retainAll(b); <span class="cm">// {B, C}</span>
+
+<span class="cm">// Difference: a - b</span>
+<span class="ty">Set</span>&lt;<span class="ty">String</span>&gt; difference = <span class="kw">new</span> <span class="ty">HashSet</span>&lt;&gt;(a);
+difference.removeAll(b); <span class="cm">// {A}</span>
+
+<span class="cm">// Subset check</span>
+<span class="kw">boolean</span> isSubset = a.containsAll(intersection); <span class="cm">// true</span>
+
+<span class="cm">// ─── DEDUPLICATION PATTERN ────────────────────────────</span>
+<span class="ty">List</span>&lt;<span class="ty">String</span>&gt; withDuplicates = <span class="ty">List</span>.of(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"A"</span>, <span class="st">"C"</span>);
+<span class="ty">Set</span>&lt;<span class="ty">String</span>&gt; deduped = <span class="kw">new</span> <span class="ty">HashSet</span>&lt;&gt;(withDuplicates); <span class="cm">// O(n)</span>
+<span class="ty">List</span>&lt;<span class="ty">String</span>&gt; cleanList = <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;(deduped);</code></pre>
+
+  <h3 id="ch10" class="sh">LinkedHashSet — Insertion-Ordered Uniqueness</h3>
+<pre data-lang="java"><code><span class="cm">// Like HashSet but preserves insertion order</span>
+<span class="ty">Set</span>&lt;<span class="ty">String</span>&gt; orderedUnique = <span class="kw">new</span> <span class="ty">LinkedHashSet</span>&lt;&gt;();
+orderedUnique.add(<span class="st">"EUR"</span>);
+orderedUnique.add(<span class="st">"USD"</span>);
+orderedUnique.add(<span class="st">"EUR"</span>); <span class="cm">// duplicate — ignored</span>
+orderedUnique.add(<span class="st">"GBP"</span>);
+<span class="cm">// Iterates: EUR → USD → GBP (insertion order maintained)</span>
+<span class="cm">// Same O(1) performance as HashSet + ordering</span></code></pre>
+
+  <h3 id="ch11" class="sh">TreeSet — Sorted Uniqueness</h3>
+<pre data-lang="java"><code><span class="ty">TreeSet</span>&lt;<span class="ty">Integer</span>&gt; amounts = <span class="kw">new</span> <span class="ty">TreeSet</span>&lt;&gt;();
+amounts.add(<span class="nm">500</span>); amounts.add(<span class="nm">100</span>); amounts.add(<span class="nm">800</span>); amounts.add(<span class="nm">300</span>);
+<span class="cm">// Always sorted: [100, 300, 500, 800]</span>
+
+<span class="cm">// Navigation — same as TreeMap</span>
+amounts.first();           <span class="cm">// O(log n) → 100</span>
+amounts.last();            <span class="cm">// O(log n) → 800</span>
+amounts.floor(<span class="nm">400</span>);       <span class="cm">// O(log n) → 300 (greatest ≤ 400)</span>
+amounts.ceiling(<span class="nm">400</span>);     <span class="cm">// O(log n) → 500 (smallest ≥ 400)</span>
+amounts.headSet(<span class="nm">500</span>);     <span class="cm">// O(log n) → view of [100, 300]</span>
+amounts.tailSet(<span class="nm">300</span>);     <span class="cm">// O(log n) → view of [300, 500, 800]</span>
+amounts.subSet(<span class="nm">200</span>, <span class="nm">700</span>); <span class="cm">// O(log n) → view of [300, 500]</span></code></pre>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Feature</th><th>HashSet</th><th>LinkedHashSet</th><th>TreeSet</th></tr></thead>
+      <tbody>
+        <tr><td>Ordering</td><td>None</td><td>Insertion order</td><td>Sorted (natural/custom)</td></tr>
+        <tr><td>add/remove/contains</td><td><span class="cx cx-g">O(1) avg</span></td><td><span class="cx cx-g">O(1) avg</span></td><td><span class="cx cx-y">O(log n)</span></td></tr>
+        <tr><td>Null allowed?</td><td>Yes (1 null)</td><td>Yes (1 null)</td><td>No (if using natural order)</td></tr>
+        <tr><td>Thread-safe?</td><td>No</td><td>No</td><td>No</td></tr>
+        <tr><td>Navigation methods?</td><td>No</td><td>No</td><td>Yes</td></tr>
+        <tr><td>Memory overhead</td><td>Baseline</td><td>Slightly more</td><td>More (tree nodes)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sh">Production Example — Duplicate Transaction Detection</h3>
+<pre data-lang="java"><code><span class="an">@Service</span>
+<span class="kw">public class</span> <span class="ty">DuplicateDetectionService</span> {
+
+    <span class="cm">// O(1) membership test for idempotency checking</span>
+    <span class="kw">private final</span> <span class="ty">Set</span>&lt;<span class="ty">String</span>&gt; processedEndToEndIds = <span class="kw">new</span> <span class="ty">HashSet</span>&lt;&gt;();
+
+    <span class="kw">public boolean</span> <span class="fn">isDuplicate</span>(<span class="ty">String</span> endToEndId) {
+        <span class="kw">return</span> !processedEndToEndIds.add(endToEndId);
+        <span class="cm">// add() returns false if already present — elegantly atomic</span>
+    }
+
+    <span class="cm">// Find accounts appearing in BOTH suspense and cleared lists</span>
+    <span class="kw">public</span> <span class="ty">Set</span>&lt;<span class="ty">String</span>&gt; <span class="fn">findReconciledAccounts</span>(
+            <span class="ty">Set</span>&lt;<span class="ty">String</span>&gt; suspense, <span class="ty">Set</span>&lt;<span class="ty">String</span>&gt; cleared) {
+        <span class="ty">Set</span>&lt;<span class="ty">String</span>&gt; result = <span class="kw">new</span> <span class="ty">HashSet</span>&lt;&gt;(suspense);
+        result.retainAll(cleared); <span class="cm">// intersection — O(n)</span>
+        <span class="kw">return</span> result;
+    }
+}</code></pre>
+
+  <div class="practice">
+    <p><strong>Exercise 1:</strong> Given two sets of IBAN account numbers (from two different bank systems), find accounts present in System A but not System B (reconciliation gap) using Set difference.</p>
+    <p><strong>Exercise 2:</strong> Use a TreeSet to maintain a live sorted leaderboard of the top 10 payment amounts. Support efficient add and remove operations.</p>
+  </div>
+
+  <div class="takeaway">
+    <ul>
+      <li>Sets guarantee uniqueness — <code>add()</code> returns false for duplicates</li>
+      <li>HashSet: O(1) operations, no ordering — default choice for uniqueness</li>
+      <li>LinkedHashSet: O(1) operations + preserves insertion order</li>
+      <li>TreeSet: O(log n) operations + sorted order + navigation methods</li>
+      <li>Set operations: <code>addAll()</code> = union, <code>retainAll()</code> = intersection, <code>removeAll()</code> = difference</li>
+      <li>Same hashCode/equals contract applies as HashMap — they're implemented using maps internally</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CHAPTER 12 — PRIORITYQUEUE
+═══════════════════════════════════════════════════════════ -->
+<section class="chapter" id="ch12">
+  <div class="chapter-header">
+    <div class="ch-badge">CH 12</div>
+    <div class="ch-title-block">
+      <div class="ch-goal">Master heap-based priority ordering for scheduling and top-K problems</div>
+      <h2 class="ch-h"><span>PriorityQueue</span> — The Heap</h2>
+      <p class="ch-subtitle">PriorityQueue ensures the highest-priority element is always served first. It's the backbone of scheduling algorithms, Dijkstra's algorithm, and top-K problems.</p>
+    </div>
+  </div>
+
+  <div class="mental-model">
+    <p>PriorityQueue is like a <strong>hospital emergency room triage system</strong>. Patients don't get seen in arrival order — the most critically ill are always moved to the front. No matter how many patients arrive, the <em>current most critical</em> patient surfaces in O(log n). Internally this is a <strong>binary heap</strong> — a special tree where the root is always the minimum (or maximum) element.</p>
+  </div>
+
+  <h3 class="sh">Heap Internals</h3>
+  <p>A <strong>min-heap</strong> (Java default) stores elements so that the <strong>smallest element is always at position 0</strong>. The heap is stored as an array, with the parent of element at index <em>i</em> at index <em>(i-1)/2</em>, and children at <em>2i+1</em> and <em>2i+2</em>. After each add or remove, the heap <em>sifts</em> elements up or down to maintain the heap property.</p>
+
+<pre data-lang="java"><code><span class="cm">// ─── MIN-HEAP (default — smallest element at top) ─────</span>
+<span class="ty">PriorityQueue</span>&lt;<span class="ty">Integer</span>&gt; minHeap = <span class="kw">new</span> <span class="ty">PriorityQueue</span>&lt;&gt;();
+minHeap.offer(<span class="nm">500</span>); minHeap.offer(<span class="nm">100</span>); minHeap.offer(<span class="nm">800</span>); minHeap.offer(<span class="nm">300</span>);
+minHeap.peek();  <span class="cm">// O(1) → 100 (minimum)</span>
+minHeap.poll();  <span class="cm">// O(log n) → removes 100, heap restructures</span>
+minHeap.peek();  <span class="cm">// O(1) → 300 (new minimum)</span>
+
+<span class="cm">// ─── MAX-HEAP (reverse order) ─────────────────────────</span>
+<span class="ty">PriorityQueue</span>&lt;<span class="ty">Integer</span>&gt; maxHeap = <span class="kw">new</span> <span class="ty">PriorityQueue</span>&lt;&gt;(<span class="ty">Comparator</span>.reverseOrder());
+maxHeap.offer(<span class="nm">500</span>); maxHeap.offer(<span class="nm">100</span>); maxHeap.offer(<span class="nm">800</span>);
+maxHeap.peek();  <span class="cm">// O(1) → 800 (maximum)</span>
+
+<span class="cm">// ─── CUSTOM PRIORITY — by payment amount ──────────────</span>
+<span class="ty">PriorityQueue</span>&lt;<span class="ty">Payment</span>&gt; byAmount = <span class="kw">new</span> <span class="ty">PriorityQueue</span>&lt;&gt;(
+    <span class="ty">Comparator</span>.comparing(<span class="ty">Payment</span>::getAmount).reversed() <span class="cm">// highest first</span>
+);
+
+<span class="cm">// ─── FULL API ─────────────────────────────────────────</span>
+<span class="ty">PriorityQueue</span>&lt;<span class="ty">Integer</span>&gt; pq = <span class="kw">new</span> <span class="ty">PriorityQueue</span>&lt;&gt;();
+pq.offer(<span class="nm">5</span>);        <span class="cm">// O(log n) — add</span>
+pq.peek();          <span class="cm">// O(1) — view head without removing</span>
+pq.poll();          <span class="cm">// O(log n) — remove and return head</span>
+pq.contains(<span class="nm">5</span>);    <span class="cm">// O(n) — linear search!</span>
+pq.remove(<span class="nm">5</span>);      <span class="cm">// O(n) — remove specific element</span>
+pq.size();          <span class="cm">// O(1)</span>
+pq.isEmpty();       <span class="cm">// O(1)</span></code></pre>
+
+  <div class="callout warn">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-body">
+      <div class="callout-title">PriorityQueue does NOT sort on iteration</div>
+      <p>Iterating a PriorityQueue with a for-each loop does NOT give you elements in priority order. Only <code>poll()</code> removes them in priority order. To iterate in order: <code>while(!pq.isEmpty()) { System.out.println(pq.poll()); }</code></p>
+    </div>
+  </div>
+
+  <div class="cx-card">
+    <div class="cx-card-title">⏱ Time Complexity — PriorityQueue</div>
+    <div class="cx-grid">
+      <div class="cx-item"><div class="cx-item-label">offer (insert)</div><div class="cx-item-val y">O(log n)</div></div>
+      <div class="cx-item"><div class="cx-item-label">poll (remove min)</div><div class="cx-item-val y">O(log n)</div></div>
+      <div class="cx-item"><div class="cx-item-label">peek (view min)</div><div class="cx-item-val g">O(1)</div></div>
+      <div class="cx-item"><div class="cx-item-label">contains</div><div class="cx-item-val r">O(n)</div></div>
+      <div class="cx-item"><div class="cx-item-label">remove(element)</div><div class="cx-item-val r">O(n)</div></div>
+      <div class="cx-item"><div class="cx-item-label">Build from n elements</div><div class="cx-item-val y">O(n)</div></div>
+    </div>
+  </div>
+
+  <h3 class="sh">Classic Problem — Top K Largest Payments</h3>
+<pre data-lang="java"><code><span class="cm">/**
+ * Find top K largest payments efficiently.
+ * Approach: min-heap of size K — maintain K largest seen so far.
+ * Time: O(n log K)  Space: O(K)
+ */</span>
+<span class="kw">public</span> <span class="ty">List</span>&lt;<span class="ty">Payment</span>&gt; <span class="fn">topKPayments</span>(<span class="ty">List</span>&lt;<span class="ty">Payment</span>&gt; payments, <span class="kw">int</span> k) {
+    <span class="cm">// Min-heap — smallest of the "top K" sits at root</span>
+    <span class="ty">PriorityQueue</span>&lt;<span class="ty">Payment</span>&gt; heap = <span class="kw">new</span> <span class="ty">PriorityQueue</span>&lt;&gt;(
+        <span class="ty">Comparator</span>.comparing(<span class="ty">Payment</span>::getAmount)
+    );
+
+    <span class="kw">for</span> (<span class="ty">Payment</span> p : payments) {
+        heap.offer(p);
+        <span class="kw">if</span> (heap.size() &gt; k) heap.poll(); <span class="cm">// evict smallest — O(log K)</span>
+    }
+
+    <span class="cm">// Collect remaining K elements (in reverse to get descending order)</span>
+    <span class="ty">List</span>&lt;<span class="ty">Payment</span>&gt; result = <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;(heap);
+    result.sort(<span class="ty">Comparator</span>.comparing(<span class="ty">Payment</span>::getAmount).reversed());
+    <span class="kw">return</span> result;
+}
+
+<span class="cm">// Why not sort()? O(n log n) vs O(n log K) — huge win when K &lt;&lt; n</span></code></pre>
+
+  <div class="practice">
+    <p><strong>Exercise 1:</strong> Implement a payment scheduler using PriorityQueue where payments are processed in order of their value date (earliest first). Handle the case where multiple payments share the same date (break ties by amount).</p>
+    <p><strong>Exercise 2:</strong> Given a stream of real-time FX trade amounts, efficiently maintain the median trade amount at all times using two heaps (one max-heap for lower half, one min-heap for upper half).</p>
+  </div>
+
+  <div class="takeaway">
+    <ul>
+      <li>PriorityQueue is a <strong>min-heap by default</strong> — smallest element at the top</li>
+      <li>Use <code>Comparator.reverseOrder()</code> for a max-heap</li>
+      <li><code>peek()</code> is O(1) — viewing the priority head is instant</li>
+      <li><code>poll()</code> and <code>offer()</code> are O(log n) — heap restructuring required</li>
+      <li>Classic interview patterns: top-K, median of stream, merge K sorted lists, scheduling</li>
+      <li>Iteration order is NOT priority order — only <code>poll()</code> gives sorted output</li>
+      <li>Not thread-safe — use <code>PriorityBlockingQueue</code> for concurrent use</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CHAPTER 13 — COLLECTIONS UTILITY
+═══════════════════════════════════════════════════════════ -->
+<section class="chapter" id="ch13">
+  <div class="chapter-header">
+    <div class="ch-badge">CH 13</div>
+    <div class="ch-title-block">
+      <div class="ch-goal">Master the Collections utility class — essential helper methods</div>
+      <h2 class="ch-h">The <span>Collections</span> Utility Class</h2>
+      <p class="ch-subtitle">java.util.Collections is a toolbox of static helper methods for sorting, searching, shuffling, and wrapping collections. Know every major method.</p>
+    </div>
+  </div>
+
+<pre data-lang="java"><code><span class="kw">import</span> java.util.Collections;
+
+<span class="ty">List</span>&lt;<span class="ty">Integer</span>&gt; amounts = <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;(<span class="ty">List</span>.of(<span class="nm">500</span>, <span class="nm">100</span>, <span class="nm">800</span>, <span class="nm">300</span>, <span class="nm">200</span>));
+
+<span class="cm">// ─── SORTING ───────────────────────────────────────────</span>
+<span class="ty">Collections</span>.sort(amounts);                           <span class="cm">// O(n log n) ascending</span>
+<span class="ty">Collections</span>.sort(amounts, <span class="ty">Comparator</span>.reverseOrder()); <span class="cm">// descending</span>
+
+<span class="cm">// ─── SEARCHING ─────────────────────────────────────────</span>
+<span class="ty">Collections</span>.sort(amounts);
+<span class="kw">int</span> idx = <span class="ty">Collections</span>.binarySearch(amounts, <span class="nm">300</span>);   <span class="cm">// O(log n) — must be sorted!</span>
+
+<span class="cm">// ─── MIN / MAX ─────────────────────────────────────────</span>
+<span class="ty">Integer</span> max = <span class="ty">Collections</span>.max(amounts);              <span class="cm">// O(n)</span>
+<span class="ty">Integer</span> min = <span class="ty">Collections</span>.min(amounts);              <span class="cm">// O(n)</span>
+
+<span class="cm">// ─── MANIPULATION ──────────────────────────────────────</span>
+<span class="ty">Collections</span>.reverse(amounts);                         <span class="cm">// O(n) in-place</span>
+<span class="ty">Collections</span>.shuffle(amounts);                         <span class="cm">// O(n) random order</span>
+<span class="ty">Collections</span>.swap(amounts, <span class="nm">0</span>, <span class="nm">4</span>);                    <span class="cm">// O(1)</span>
+<span class="ty">Collections</span>.fill(amounts, <span class="nm">0</span>);                        <span class="cm">// O(n) — all elements to value</span>
+<span class="ty">Collections</span>.rotate(amounts, <span class="nm">2</span>);                      <span class="cm">// O(n) — rotate right by 2</span>
+
+<span class="cm">// ─── FREQUENCY & DISJOINT ──────────────────────────────</span>
+<span class="kw">int</span> freq = <span class="ty">Collections</span>.frequency(amounts, <span class="nm">100</span>);      <span class="cm">// O(n) — count occurrences</span>
+<span class="kw">boolean</span> noCommon = <span class="ty">Collections</span>.disjoint(amounts, otherList); <span class="cm">// O(n*m) check</span>
+
+<span class="cm">// ─── COPY & FILL ───────────────────────────────────────</span>
+<span class="ty">List</span>&lt;<span class="ty">Integer</span>&gt; dest = <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;(<span class="ty">Collections</span>.nCopies(<span class="nm">5</span>, <span class="nm">0</span>));
+<span class="ty">Collections</span>.copy(dest, amounts);                      <span class="cm">// dest must be >= src size</span>
+
+<span class="cm">// ─── UNMODIFIABLE WRAPPERS ─────────────────────────────</span>
+<span class="ty">List</span>&lt;<span class="ty">String</span>&gt; currencies = <span class="ty">Collections</span>.unmodifiableList(mutableList);
+<span class="ty">Map</span>&lt;<span class="ty">String</span>, <span class="ty">Integer</span>&gt; readOnly = <span class="ty">Collections</span>.unmodifiableMap(mutableMap);
+<span class="ty">Set</span>&lt;<span class="ty">String</span>&gt; roSet = <span class="ty">Collections</span>.unmodifiableSet(mutableSet);
+<span class="cm">// Attempting to modify throws UnsupportedOperationException</span>
+
+<span class="cm">// ─── SYNCHRONIZED WRAPPERS (single-lock — prefer ConcurrentHashMap) ──</span>
+<span class="ty">List</span>&lt;<span class="ty">String</span>&gt; safe = <span class="ty">Collections</span>.synchronizedList(<span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;());
+<span class="ty">Map</span>&lt;<span class="ty">String</span>,<span class="ty">Integer</span>&gt; safMap = <span class="ty">Collections</span>.synchronizedMap(<span class="kw">new</span> <span class="ty">HashMap</span>&lt;&gt;());
+
+<span class="cm">// ─── SINGLETON & EMPTY COLLECTIONS ────────────────────</span>
+<span class="ty">List</span>&lt;<span class="ty">String</span>&gt; single = <span class="ty">Collections</span>.singletonList(<span class="st">"only-one"</span>); <span class="cm">// immutable, 1 element</span>
+<span class="ty">List</span>&lt;<span class="ty">String</span>&gt; empty  = <span class="ty">Collections</span>.emptyList();                <span class="cm">// immutable, 0 elements</span>
+<span class="ty">Set</span>&lt;<span class="ty">String</span>&gt; emptySet = <span class="ty">Collections</span>.emptySet();</code></pre>
+
+  <div class="takeaway">
+    <ul>
+      <li><code>Collections.sort()</code> uses TimSort — O(n log n), stable, excellent for nearly-sorted data</li>
+      <li><code>Collections.binarySearch()</code> requires a sorted list — undefined behavior on unsorted lists</li>
+      <li>Unmodifiable wrappers are shallow — elements themselves can still be mutated if they're mutable objects</li>
+      <li>For production thread safety, prefer <code>ConcurrentHashMap</code> over <code>Collections.synchronizedMap()</code></li>
+      <li><code>Collections.emptyList()</code> is better than <code>new ArrayList&lt;&gt;()</code> for return values that are never populated</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CHAPTER 14 — CHOOSING THE RIGHT DS
+═══════════════════════════════════════════════════════════ -->
+<section class="chapter" id="ch14">
+  <div class="chapter-header">
+    <div class="ch-badge">CH 14</div>
+    <div class="ch-title-block">
+      <div class="ch-goal">Build an intuition for selecting the optimal data structure for any problem</div>
+      <h2 class="ch-h">Choosing the <span>Right Data Structure</span></h2>
+      <p class="ch-subtitle">The right data structure is context-dependent. This chapter gives you the decision framework — ask these questions, in this order.</p>
+    </div>
+  </div>
+
+  <h3 class="sh">The Decision Framework</h3>
+
+  <div class="tbl-wrap">
+    <table class="decision-table">
+      <thead>
+        <tr><th>Question</th><th>If Yes → Consider</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Do I need to access elements by index?</td>
+          <td>ArrayList, Array</td>
+          <td>O(1) random access; avoid LinkedList</td>
+        </tr>
+        <tr>
+          <td>Do I need key-value lookup?</td>
+          <td>HashMap (unsorted), LinkedHashMap (ordered), TreeMap (sorted by key)</td>
+          <td>HashMap for speed; TreeMap for range queries</td>
+        </tr>
+        <tr>
+          <td>Do I need uniqueness guarantee?</td>
+          <td>HashSet, LinkedHashSet, TreeSet</td>
+          <td>Set implementations handle deduplication automatically</td>
+        </tr>
+        <tr>
+          <td>Do I need FIFO processing order?</td>
+          <td>ArrayDeque (as Queue), LinkedBlockingQueue (concurrent)</td>
+          <td>Message queues, BFS, task pipelines</td>
+        </tr>
+        <tr>
+          <td>Do I need LIFO processing order?</td>
+          <td>ArrayDeque (as Stack)</td>
+          <td>Undo systems, DFS, expression parsing</td>
+        </tr>
+        <tr>
+          <td>Do I need the min or max efficiently?</td>
+          <td>PriorityQueue (min-heap / max-heap)</td>
+          <td>Top-K, scheduling, Dijkstra</td>
+        </tr>
+        <tr>
+          <td>Do I need sorted order + range queries?</td>
+          <td>TreeMap (key-value), TreeSet (values only)</td>
+          <td>Date ranges, floor/ceiling lookups</td>
+        </tr>
+        <tr>
+          <td>Do I need insertion-order iteration?</td>
+          <td>LinkedHashMap, LinkedHashSet</td>
+          <td>Preserves order of first insertion</td>
+        </tr>
+        <tr>
+          <td>Do I need thread safety?</td>
+          <td>ConcurrentHashMap, CopyOnWriteArrayList, LinkedBlockingQueue, PriorityBlockingQueue</td>
+          <td>Never use synchronizedMap in high-concurrency code</td>
+        </tr>
+        <tr>
+          <td>Is size fixed and known ahead of time?</td>
+          <td>Plain array (int[], String[], etc.)</td>
+          <td>Maximum performance, no boxing overhead</td>
+        </tr>
+        <tr>
+          <td>Need frequent head/tail insertion/deletion?</td>
+          <td>LinkedList, ArrayDeque</td>
+          <td>Prefer ArrayDeque for better cache performance</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sh">Real-World Scenario Mapping</h3>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Scenario</th><th>Best DS</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Payment idempotency checking (seen before?)</td><td>HashSet</td><td>O(1) contains()</td></tr>
+        <tr><td>Account balance lookup by ID</td><td>HashMap</td><td>O(1) get()</td></tr>
+        <tr><td>Transaction history (ordered, queryable)</td><td>ArrayList</td><td>O(1) random access, good sort support</td></tr>
+        <tr><td>SWIFT message dispatch queue</td><td>ArrayDeque (as Queue)</td><td>O(1) offer/poll, FIFO</td></tr>
+        <tr><td>Settlement schedule by date</td><td>TreeMap&lt;LocalDate, ...&gt;</td><td>Sorted, supports headMap/tailMap</td></tr>
+        <tr><td>Top 5 highest-value trades today</td><td>PriorityQueue (min-heap of size 5)</td><td>O(n log 5) = O(n)</td></tr>
+        <tr><td>Currency pair FX rates (sorted)</td><td>TreeMap</td><td>Sorted keys, range navigation</td></tr>
+        <tr><td>User session management (LRU eviction)</td><td>LinkedHashMap (access-order)</td><td>Override removeEldestEntry()</td></tr>
+        <tr><td>Payment rollback steps</td><td>ArrayDeque (as Stack)</td><td>LIFO — pop in reverse order</td></tr>
+        <tr><td>Deduplicating account IDs</td><td>HashSet</td><td>O(n) to build, O(1) per check</td></tr>
+        <tr><td>Available currencies (sorted + unique)</td><td>TreeSet</td><td>Sorted + unique + O(log n)</td></tr>
+        <tr><td>Concurrent request processing</td><td>ConcurrentHashMap</td><td>Thread-safe, no global lock</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sh">Comprehensive Complexity Comparison</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>Data Structure</th><th>Access</th><th>Search</th><th>Insert</th><th>Delete</th><th>Space</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Array</td><td><span class="cx cx-g">O(1)</span></td><td><span class="cx cx-y">O(n)</span></td><td><span class="cx cx-r">O(n)</span></td><td><span class="cx cx-r">O(n)</span></td><td>O(n)</td></tr>
+        <tr><td>ArrayList</td><td><span class="cx cx-g">O(1)</span></td><td><span class="cx cx-y">O(n)</span></td><td><span class="cx cx-g">O(1)*</span></td><td><span class="cx cx-r">O(n)</span></td><td>O(n)</td></tr>
+        <tr><td>LinkedList</td><td><span class="cx cx-r">O(n)</span></td><td><span class="cx cx-y">O(n)</span></td><td><span class="cx cx-g">O(1)†</span></td><td><span class="cx cx-g">O(1)†</span></td><td>O(n)</td></tr>
+        <tr><td>Stack (ArrayDeque)</td><td>—</td><td><span class="cx cx-y">O(n)</span></td><td><span class="cx cx-g">O(1)*</span></td><td><span class="cx cx-g">O(1)</span></td><td>O(n)</td></tr>
+        <tr><td>Queue (ArrayDeque)</td><td>—</td><td><span class="cx cx-y">O(n)</span></td><td><span class="cx cx-g">O(1)*</span></td><td><span class="cx cx-g">O(1)</span></td><td>O(n)</td></tr>
+        <tr><td>HashMap</td><td>—</td><td><span class="cx cx-g">O(1)†</span></td><td><span class="cx cx-g">O(1)*†</span></td><td><span class="cx cx-g">O(1)*†</span></td><td>O(n)</td></tr>
+        <tr><td>LinkedHashMap</td><td>—</td><td><span class="cx cx-g">O(1)†</span></td><td><span class="cx cx-g">O(1)*†</span></td><td><span class="cx cx-g">O(1)*†</span></td><td>O(n)</td></tr>
+        <tr><td>TreeMap</td><td>—</td><td><span class="cx cx-y">O(log n)</span></td><td><span class="cx cx-y">O(log n)</span></td><td><span class="cx cx-y">O(log n)</span></td><td>O(n)</td></tr>
+        <tr><td>HashSet</td><td>—</td><td><span class="cx cx-g">O(1)†</span></td><td><span class="cx cx-g">O(1)*†</span></td><td><span class="cx cx-g">O(1)*†</span></td><td>O(n)</td></tr>
+        <tr><td>TreeSet</td><td>—</td><td><span class="cx cx-y">O(log n)</span></td><td><span class="cx cx-y">O(log n)</span></td><td><span class="cx cx-y">O(log n)</span></td><td>O(n)</td></tr>
+        <tr><td>PriorityQueue</td><td><span class="cx cx-g">O(1)‡</span></td><td><span class="cx cx-r">O(n)</span></td><td><span class="cx cx-y">O(log n)</span></td><td><span class="cx cx-y">O(log n)</span></td><td>O(n)</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px;color:#6b7280;margin-top:8px;">* Amortised &nbsp;&nbsp; † Average case &nbsp;&nbsp; ‡ Peek only (top element)</p>
+  </div>
+
+  <div class="takeaway">
+    <ul>
+      <li>Ask: Do I need ordering? Uniqueness? Key-value? Priority? — these guide the choice</li>
+      <li>HashMap is the default "fast lookup" choice; ArrayList is the default "ordered list" choice</li>
+      <li>When in doubt between TreeMap/TreeSet vs HashMap/HashSet — ask if you need sorted order or range queries</li>
+      <li>For concurrency, Java provides thread-safe alternatives in <code>java.util.concurrent</code></li>
+      <li>Benchmark with realistic data before micro-optimising — cache effects often surprise you</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CHAPTER 15 — INTERVIEW MASTER GUIDE
+═══════════════════════════════════════════════════════════ -->
+<section class="chapter" id="ch15">
+  <div class="chapter-header">
+    <div class="ch-badge">CH 15</div>
+    <div class="ch-title-block">
+      <div class="ch-goal">Ace every DS/collections interview question at any level</div>
+      <h2 class="ch-h">Interview <span>Master Guide</span></h2>
+      <p class="ch-subtitle">The most important concepts, patterns, and questions asked in Java engineering interviews — from junior to senior level.</p>
+    </div>
+  </div>
+
+  <h3 class="sh">Tier 1 — Core Conceptual Questions</h3>
+
+  <div class="interview-q">
+    <div class="iq-label">Frequently Asked — Every Level</div>
+    <div class="iq-q">What is the difference between HashMap and Hashtable?</div>
+    <div class="iq-a">HashMap is not synchronised (not thread-safe), allows one null key and multiple null values, and is faster. Hashtable is synchronised (thread-safe via method-level locking), does not allow null keys or values, and is slower. In modern Java, you should use <code>ConcurrentHashMap</code> instead of Hashtable for thread-safe maps — it uses segment-level locking for much better concurrency.</div>
+  </div>
+
+  <div class="interview-q">
+    <div class="iq-label">Frequently Asked — Every Level</div>
+    <div class="iq-q">What happens when two keys have the same hashCode in a HashMap?</div>
+    <div class="iq-a">This is a <strong>hash collision</strong>. Both entries go into the same bucket (array slot). Before Java 8, collisions are stored as a linked list — O(n) worst-case lookup for that bucket. Since Java 8, when a bucket's linked list reaches 8 entries, it's converted to a <strong>red-black tree</strong>, reducing worst-case lookup to O(log n). The equals() method is then used to find the exact entry within the bucket.</div>
+  </div>
+
+  <div class="interview-q">
+    <div class="iq-label">Must Know</div>
+    <div class="iq-q">Why must you override hashCode() when you override equals()?</div>
+    <div class="iq-a">The <strong>hashCode contract</strong> states: if two objects are equal (via equals()), they MUST return the same hashCode. HashMap uses hashCode to determine the bucket, then equals() to find the exact entry within the bucket. If two equal objects have different hashCodes, they land in different buckets — the map will never find the second entry when looking up the first, breaking the map's correctness completely.</div>
+  </div>
+
+  <div class="interview-q">
+    <div class="iq-label">Senior Level</div>
+    <div class="iq-q">What is the time complexity of HashMap operations, and when can they degrade?</div>
+    <div class="iq-a">Average case is O(1) for get/put/remove. This degrades when: (1) many keys collide into the same bucket — worst case O(n) before Java 8, O(log n) after with tree conversion. (2) The load factor threshold is exceeded, triggering rehashing — O(n) for that operation. To prevent degradation: use well-distributed hashCode implementations, choose appropriate initial capacity (<code>new HashMap&lt;&gt;(expectedSize / 0.75 + 1)</code>), and avoid mutable objects as keys.</div>
+  </div>
+
+  <div class="interview-q">
+    <div class="iq-label">Frequently Asked</div>
+    <div class="iq-q">When would you choose LinkedList over ArrayList?</div>
+    <div class="iq-a">Rarely in practice. Theoretically, LinkedList is better for O(1) insertions/deletions at the head or tail. However, ArrayList's cache locality means it often outperforms LinkedList even in those scenarios. Choose LinkedList only when: you need a Deque (double-ended queue), you have a confirmed performance bottleneck from ArrayList's head insertions, or you're implementing a specific algorithm requiring efficient node splicing. Otherwise, ArrayList wins.</div>
+  </div>
+
+  <div class="interview-q">
+    <div class="iq-label">Must Know</div>
+    <div class="iq-q">What is ConcurrentModificationException and how do you avoid it?</div>
+    <div class="iq-a">CME is thrown when you structurally modify a collection (add/remove elements) while iterating over it with a for-each loop or iterator, except through the iterator's own remove() method. The collection tracks a modCount. The iterator checks it on each next() call — if mismatched, it throws CME. Solutions: use <code>Iterator.remove()</code> for safe removal, use <code>removeIf()</code> (Java 8+), collect items to remove then call removeAll(), or use a thread-safe collection like CopyOnWriteArrayList.</div>
+  </div>
+
+  <div class="interview-q">
+    <div class="iq-label">Must Know</div>
+    <div class="iq-q">What is the difference between fail-fast and fail-safe iterators?</div>
+    <div class="iq-a"><strong>Fail-fast iterators</strong> (ArrayList, HashMap, HashSet): immediately throw ConcurrentModificationException if the collection is structurally modified during iteration. They operate directly on the collection. <strong>Fail-safe iterators</strong> (ConcurrentHashMap, CopyOnWriteArrayList): iterate on a snapshot or allow concurrent modification without exceptions. They may not reflect changes made after iteration started. The tradeoff: fail-safe is safer in concurrent scenarios but uses more memory and may be stale.</div>
+  </div>
+
+  <h3 class="sh">Tier 2 — Coding Problems</h3>
+
+  <div class="interview-q">
+    <div class="iq-label">Common Coding Interview</div>
+    <div class="iq-q">Two Sum — Find two numbers that add to a target</div>
+    <div class="iq-a">Use a HashMap for O(n) solution: for each number, check if (target - number) exists in the map. If yes, found the pair. If no, add the number to the map. This avoids the brute-force O(n²) nested loop.</div>
+  </div>
+<pre data-lang="java"><code><span class="kw">public int</span>[] <span class="fn">twoSum</span>(<span class="kw">int</span>[] nums, <span class="kw">int</span> target) {
+    <span class="ty">Map</span>&lt;<span class="ty">Integer</span>, <span class="ty">Integer</span>&gt; seen = <span class="kw">new</span> <span class="ty">HashMap</span>&lt;&gt;();
+    <span class="kw">for</span> (<span class="kw">int</span> i = <span class="nm">0</span>; i &lt; nums.length; i++) {
+        <span class="kw">int</span> complement = target - nums[i];
+        <span class="kw">if</span> (seen.containsKey(complement)) {
+            <span class="kw">return new int</span>[]{seen.get(complement), i};
+        }
+        seen.put(nums[i], i);
+    }
+    <span class="kw">return new int</span>[]{};
+} <span class="cm">// O(n) time, O(n) space</span></code></pre>
+
+  <div class="interview-q">
+    <div class="iq-label">Common Coding Interview</div>
+    <div class="iq-q">Group Anagrams</div>
+    <div class="iq-a">Sort each word to create a canonical key. Group words by their sorted form using a HashMap&lt;String, List&lt;String&gt;&gt;.</div>
+  </div>
+<pre data-lang="java"><code><span class="kw">public</span> <span class="ty">List</span>&lt;<span class="ty">List</span>&lt;<span class="ty">String</span>&gt;&gt; <span class="fn">groupAnagrams</span>(<span class="ty">String</span>[] strs) {
+    <span class="ty">Map</span>&lt;<span class="ty">String</span>, <span class="ty">List</span>&lt;<span class="ty">String</span>&gt;&gt; map = <span class="kw">new</span> <span class="ty">HashMap</span>&lt;&gt;();
+    <span class="kw">for</span> (<span class="ty">String</span> s : strs) {
+        <span class="kw">char</span>[] chars = s.toCharArray();
+        <span class="ty">Arrays</span>.sort(chars);
+        <span class="ty">String</span> key = <span class="kw">new</span> <span class="ty">String</span>(chars);
+        map.computeIfAbsent(key, k -&gt; <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;()).add(s);
+    }
+    <span class="kw">return</span> <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;(map.values());
+} <span class="cm">// O(n × k log k) where k = max word length</span></code></pre>
+
+  <div class="interview-q">
+    <div class="iq-label">Common Coding Interview</div>
+    <div class="iq-q">LRU Cache Implementation</div>
+    <div class="iq-a">Use LinkedHashMap in access-order mode. Override removeEldestEntry() to evict the least-recently-used entry when the cache is full. All operations are O(1).</div>
+  </div>
+<pre data-lang="java"><code><span class="kw">class</span> <span class="ty">LRUCache</span> {
+    <span class="kw">private final</span> <span class="ty">Map</span>&lt;<span class="ty">Integer</span>, <span class="ty">Integer</span>&gt; cache;
+
+    <span class="kw">public</span> <span class="ty">LRUCache</span>(<span class="kw">int</span> capacity) {
+        cache = <span class="kw">new</span> <span class="ty">LinkedHashMap</span>&lt;&gt;(capacity, <span class="nm">0.75f</span>, <span class="kw">true</span>) {
+            <span class="an">@Override</span>
+            <span class="kw">protected boolean</span> <span class="fn">removeEldestEntry</span>(<span class="ty">Map</span>.<span class="ty">Entry</span>&lt;<span class="ty">Integer</span>, <span class="ty">Integer</span>&gt; eldest) {
+                <span class="kw">return</span> size() &gt; capacity;
+            }
+        };
+    }
+
+    <span class="kw">public int</span> <span class="fn">get</span>(<span class="kw">int</span> key) {
+        <span class="kw">return</span> cache.getOrDefault(key, -<span class="nm">1</span>); <span class="cm">// O(1) — moves to most-recent</span>
+    }
+
+    <span class="kw">public void</span> <span class="fn">put</span>(<span class="kw">int</span> key, <span class="kw">int</span> value) {
+        cache.put(key, value); <span class="cm">// O(1) — auto-evicts if over capacity</span>
+    }
+}</code></pre>
+
+  <h3 class="sh">Tier 3 — Advanced Design Questions</h3>
+
+  <div class="interview-q">
+    <div class="iq-label">Senior/Lead Level</div>
+    <div class="iq-q">How would you design a high-throughput payment deduplication system handling 100K messages/second?</div>
+    <div class="iq-a">
+      Single JVM: <code>ConcurrentHashMap</code> with TTL-based eviction using scheduled cleanup. The map stores endToEndId → timestamp. Cleanup removes entries older than the deduplication window (e.g., 24h).<br><br>
+      Distributed: Redis with SET NX (set-if-not-exists) and TTL. SETNX is atomic — a message ID is either claimed or rejected. For billions of IDs, consider a <strong>Bloom Filter</strong> (probabilistic, space-efficient, no false negatives) as a first pass before querying the persistent store.<br><br>
+      Key data structure choice: ConcurrentHashMap (JVM-local), Redis SET (distributed), Bloom Filter (ultra-high-scale with acceptable false-positive rate).
+    </div>
+  </div>
+
+  <div class="interview-q">
+    <div class="iq-label">Senior Level</div>
+    <div class="iq-q">Explain how Java 8 improved HashMap worst-case performance.</div>
+    <div class="iq-a">Before Java 8, colliding entries in a bucket were stored as a linked list — O(n) worst-case lookup. A hash DOS attack could degrade all HashMap operations to O(n) by crafting inputs with the same hash. Java 8 introduced <strong>tree bins</strong>: when a bucket's linked list grows to 8 entries, it converts to a red-black tree — reducing worst-case lookup to O(log n). When entries drop below 6, it reverts to a linked list. Additionally, Java 8 improved the hash function to better distribute String keys.</div>
+  </div>
+
+  <h3 class="sh">Quick-Fire Question Bank</h3>
+  <div class="quiz-section">
+    <div class="quiz-header">
+      <h4>Master Quiz — All Chapters</h4>
+      <span class="quiz-badge">10 Questions</span>
+    </div>
+
+    <div class="quiz-q">
+      <p>Q1. Which collection would you use to count the frequency of each word in a text file?</p>
+      <details class="quiz-ans"><summary>Reveal Answer</summary>
+        <div class="ans-body">HashMap&lt;String, Integer&gt;. Use merge(word, 1, Integer::sum) or compute to increment counts. For sorted output by frequency, collect into a list and sort, or use TreeMap if you want word-alphabetical order.</div>
+      </details>
+    </div>
+
+    <div class="quiz-q">
+      <p>Q2. What is the output order when iterating a HashMap?</p>
+      <details class="quiz-ans"><summary>Reveal Answer</summary>
+        <div class="ans-body">Undefined — there is no guaranteed iteration order in HashMap. The order depends on hash codes and internal bucket distribution. Never rely on HashMap iteration order. Use LinkedHashMap for insertion order or TreeMap for sorted order.</div>
+      </details>
+    </div>
+
+    <div class="quiz-q">
+      <p>Q3. What is the initial default capacity and load factor of HashMap?</p>
+      <details class="quiz-ans"><summary>Reveal Answer</summary>
+        <div class="ans-body">Initial capacity = 16, load factor = 0.75. This means the map rehashes when 12 entries (16 × 0.75) are added. Always use a power of 2 for initial capacity — HashMap requires this for its bitwise bucket indexing.</div>
+      </details>
+    </div>
+
+    <div class="quiz-q">
+      <p>Q4. Can a HashSet contain null? What about TreeSet?</p>
+      <details class="quiz-ans"><summary>Reveal Answer</summary>
+        <div class="ans-body">HashSet: yes, one null element allowed. TreeSet: no — null would cause a NullPointerException when compared using compareTo() during tree navigation. Exception: if you provide a custom Comparator that handles null explicitly.</div>
+      </details>
+    </div>
+
+    <div class="quiz-q">
+      <p>Q5. What is the difference between poll() and remove() on a Queue?</p>
+      <details class="quiz-ans"><summary>Reveal Answer</summary>
+        <div class="ans-body">Both remove the head element. remove() throws NoSuchElementException if the queue is empty. poll() returns null if empty. Always prefer poll() — defensive programming avoids unexpected exceptions.</div>
+      </details>
+    </div>
+
+    <div class="quiz-q">
+      <p>Q6. Why is ArrayList not thread-safe and how do you fix it?</p>
+      <details class="quiz-ans"><summary>Reveal Answer</summary>
+        <div class="ans-body">ArrayList is not synchronized — concurrent modifications can corrupt internal state (wrong size count, missed elements). Fix options: (1) CopyOnWriteArrayList — thread-safe, creates a new copy on each write, ideal for read-heavy scenarios. (2) Collections.synchronizedList() — wraps with coarse lock, must manually synchronize iteration. (3) External synchronization with synchronized blocks around all access.</div>
+      </details>
+    </div>
+
+    <div class="quiz-q">
+      <p>Q7. What data structure would you use to find the median of a stream of numbers efficiently?</p>
+      <details class="quiz-ans"><summary>Reveal Answer</summary>
+        <div class="ans-body">Two heaps: a max-heap for the lower half and a min-heap for the upper half. Maintain size balance (differ by at most 1). Median is the top of the larger heap, or average of both tops if equal size. O(log n) per insertion, O(1) median query.</div>
+      </details>
+    </div>
+
+    <div class="quiz-q">
+      <p>Q8. Explain the difference between Comparable and Comparator in Java collections.</p>
+      <details class="quiz-ans"><summary>Reveal Answer</summary>
+        <div class="ans-body">Comparable is implemented by the class itself (natural ordering) via compareTo(). Comparator is an external comparison strategy passed to sorted collections or sort methods. Use Comparable when there's one obvious natural order. Use Comparator for multiple sort orders, sorting third-party classes you can't modify, or when the natural order doesn't suit your need (e.g., TreeMap with custom Date comparison).</div>
+      </details>
+    </div>
+
+    <div class="quiz-q">
+      <p>Q9. What is the space complexity of a HashMap with n entries?</p>
+      <details class="quiz-ans"><summary>Reveal Answer</summary>
+        <div class="ans-body">O(n) for the entries themselves, but with significant overhead. The backing array is always larger than n due to the load factor (at most 75% full). Each entry is a Node object (key + value + hash + next pointer). Total memory ≈ n × (entry object overhead) + array capacity × reference size. In practice, HashMaps use significantly more memory per element than arrays or ArrayLists.</div>
+      </details>
+    </div>
+
+    <div class="quiz-q">
+      <p>Q10. How would you efficiently find all accounts with a balance between £5,000 and £50,000?</p>
+      <details class="quiz-ans"><summary>Reveal Answer</summary>
+        <div class="ans-body">If accounts are stored by balance as the key: TreeMap&lt;BigDecimal, Account&gt; — use subMap(5000, 50001) for O(log n + k) where k is the result size. If accounts are stored by ID: HashMap&lt;String, Account&gt; — you must scan all values, which is O(n). The key lesson: if range queries on a specific field are frequent, store or index by that field in a TreeMap.</div>
+      </details>
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <ul>
+      <li>The most common interview mistake: choosing HashMap when you need sorted order, or ArrayList when you need O(1) lookup</li>
+      <li>Always mention time complexity in interviews — then justify the choice</li>
+      <li>hashCode/equals contract is the single most important Java collections concept to master</li>
+      <li>Know the three Iterator types: fail-fast (ArrayList, HashMap), fail-safe (ConcurrentHashMap, CopyOnWriteArrayList)</li>
+      <li>The two-heap technique (find median of stream) is a classic that tests heap mastery</li>
+      <li>LRU cache = LinkedHashMap is the go-to elegant solution</li>
+      <li>For "design a system" questions: always mention thread safety, scalability, and which ds/algorithm you'd use at each layer</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══ FINAL REVIEW ═══ -->
+<section class="chapter" style="border-bottom:none;">
+  <h2 class="ch-h" style="margin-bottom:24px;">🎓 You've Completed the <span>Java DS Mastery Guide</span></h2>
+
+  <div class="callout tip">
+    <div class="callout-icon">🚀</div>
+    <div class="callout-body">
+      <div class="callout-title">What to do next</div>
+      <p>1. Solve 20 LeetCode problems using each DS chapter as your guide. Start with Easy, move to Medium.</p>
+      <p>2. Build the banking transaction system from scratch — design which DS you'd use for each component before coding.</p>
+      <p>3. Revisit the Interview Chapter every week until every answer comes to you instantly.</p>
+      <p>4. Profile a real application using JMH benchmarks to see cache effects between ArrayList and LinkedList in your actual use case.</p>
+    </div>
+  </div>
+
+  <div class="mental-model" style="margin-top:28px;">
+    <p><strong>The meta-skill:</strong> When you see any programming problem, stop and ask three questions before writing code:<br>
+    1. <em>What operations do I need?</em> (lookup, insert, delete, order, uniqueness, priority?)<br>
+    2. <em>What's the hot path?</em> (which operation runs most often, and how large is n?)<br>
+    3. <em>What are the constraints?</em> (thread safety, memory, ordered output?)<br><br>
+    These three questions will guide you to the right data structure every single time.</p>
+  </div>
+</section>
+
+
+
+</div><!-- end .page -->
+
+<a href="#top" class="back-top" title="Back to top">↑</a>
+
+</body>
+</html>
